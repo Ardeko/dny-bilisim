@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://dny.com.tr/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://dny.com.tr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dny.com.tr/?lang=en"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://dny.com.tr/hakkimizda.html</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://dny.com.tr/hakkimizda.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dny.com.tr/hakkimizda.html?lang=en"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dny.com.tr/hizmetler.html</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://dny.com.tr/hizmetler.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dny.com.tr/hizmetler.html?lang=en"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dny.com.tr/referanslar.html</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://dny.com.tr/referanslar.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dny.com.tr/referanslar.html?lang=en"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dny.com.tr/uzak-destek.html</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://dny.com.tr/uzak-destek.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dny.com.tr/uzak-destek.html?lang=en"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dny.com.tr/gerekli-yazilimlar.html</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://dny.com.tr/gerekli-yazilimlar.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dny.com.tr/gerekli-yazilimlar.html?lang=en"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dny.com.tr/iletisim.html</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://dny.com.tr/iletisim.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dny.com.tr/iletisim.html?lang=en"/>
+    <priority>0.8</priority>
+  </url>
+</urlset>

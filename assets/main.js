@@ -9,6 +9,15 @@
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
 
+  // Bir modül hata verirse diğerleri çalışmaya devam etsin.
+  // (Tek bir eksik HTML öğesi yüzünden sayfanın yarısının ölmesini engeller.)
+  function safe(name, fn) {
+    try { fn(); }
+    catch (err) {
+      if (window.console && console.warn) console.warn('[dny] modül atlandı: ' + name, err);
+    }
+  }
+
   /* ---------- 1. animasyonlu gradyan arka plan ---------- */
   function aurora(cv) {
     var ctx = cv.getContext('2d');
@@ -17,6 +26,7 @@
     var w = 0, h = 0, dpr = 1, t = 0;
     var blobs = [], nodes = [], raf = null, visible = true, rect = null;
     var signalOn = cv.hasAttribute('data-signal');
+    var spinY = 0, tiltX = 0, tiltY = 0;   // 3B döndürme durumu
 
     // imleç durumu (sayfa koordinatı -> canvas koordinatı)
     var cliX = -99999, cliY = -99999;   // en son imleç konumu (viewport)
@@ -56,18 +66,21 @@
         };
       });
 
-      var count = Math.round(clamp(w / 34, w < 520 ? 9 : 14, 46));
+      // 3B nokta bulutu: noktalar birim küre içine dağılır, her karede
+      // döndürülüp perspektifle ekrana izdüşürülür. Kütüphane kullanılmaz.
+      var count = Math.round(clamp(w / 30, w < 520 ? 14 : 22, 62));
       nodes = [];
       for (var n = 0; n < count; n++) {
-        // z: 0 = uzak katman, 1 = ön katman. Boyut, parlaklık, hız ve
-        // paralaks kayması derinliğe göre değişir — düz bir ağ yerine hacim hissi verir.
-        var z = Math.random();
+        // küre içinde düzgün dağılım
+        var u = Math.random(), v = Math.random(), rr = Math.cbrt(Math.random());
+        var th = u * Math.PI * 2, ph = Math.acos(2 * v - 1);
         nodes.push({
-          x: Math.random() * w, y: Math.random() * h, z: z,
-          vx: (Math.random() - 0.5) * (0.07 + z * 0.22),
-          vy: (Math.random() - 0.5) * (0.07 + z * 0.22),
-          r: 0.5 + z * 2.1,
-          rx: 0, ry: 0
+          x: rr * Math.sin(ph) * Math.cos(th),
+          y: rr * Math.sin(ph) * Math.sin(th) * 0.66,   // dikeyde biraz basık
+          z: rr * Math.cos(ph),
+          spin: 0.6 + Math.random() * 0.8,               // kendi yörünge hızı
+          base: 0.7 + Math.random() * 1.5,
+          sx: 0, sy: 0, sz: 0, k: 1
         });
       }
     }
@@ -122,57 +135,71 @@
         ctx.beginPath(); ctx.moveTo(0, gy + 0.5); ctx.lineTo(w, gy + 0.5); ctx.stroke();
       }
 
-      // --- düğümler: serbest sürüklenme + imleç çekimi ---
-      nodes.forEach(function (n) {
-        n.x += n.vx; n.y += n.vy;
-        if (n.x < 0 || n.x > w) n.vx *= -1;
-        if (n.y < 0 || n.y > h) n.vy *= -1;
+      // --- 3B: döndür, perspektifle izdüşür ---
+      // imleç kamerayı eğer; bulut kendi ekseninde yavaşça döner
+      tiltY += (((live ? (pX - w / 2) / w : 0) * 0.9) - tiltY) * 0.045;
+      tiltX += (((live ? (pY - h / 2) / h : 0) * 0.6) - tiltX) * 0.045;
+      var ry = spinY + tiltY, rx = tiltX;
+      var cY = Math.cos(ry), sY = Math.sin(ry), cX = Math.cos(rx), sX = Math.sin(rx);
+      var cx3 = w / 2, cy3 = h * 0.5;
+      var spread = Math.min(w, h) * 0.72;
+      var CAM = 2.7;                       // kamera uzaklığı (küçüldükçe perspektif sertleşir)
 
-        // derinlik paralaksı: ön katman imleci daha çok takip eder
-        n.rx = n.x + offX * (6 + n.z * 46);
-        n.ry = n.y + offY * (6 + n.z * 46);
-        if (live) {
-          var dx = pX - n.rx, dy = pY - n.ry;
-          var d = Math.hypot(dx, dy) || 1;
-          if (d < 230) {
-            var pull = (1 - d / 230) * (12 + n.z * 34) * power;
-            n.rx += dx / d * pull;
-            n.ry += dy / d * pull;
-          }
-        }
+      nodes.forEach(function (n) {
+        // her nokta kendi hızında da döner: bulut cansız durmasın
+        var a = spinY * n.spin * 0.35;
+        var px0 = n.x * Math.cos(a) - n.z * Math.sin(a);
+        var pz0 = n.x * Math.sin(a) + n.z * Math.cos(a);
+        // Y ekseni
+        var x1 = px0 * cY - pz0 * sY;
+        var z1 = px0 * sY + pz0 * cY;
+        // X ekseni
+        var y2 = n.y * cX - z1 * sX;
+        var z2 = n.y * sX + z1 * cX;
+
+        var k = CAM / (CAM + z2);          // perspektif katsayısı
+        n.k = k;
+        n.sz = z2;
+        n.sx = cx3 + x1 * spread * k;
+        n.sy = cy3 + y2 * spread * k;
       });
 
-      // düğümler arası bağlantılar
-      for (var i = 0; i < nodes.length; i++) {
-        for (var k = i + 1; k < nodes.length; k++) {
-          var a = nodes[i], b2 = nodes[k];
-          if (Math.abs(a.z - b2.z) > 0.4) continue;   // sadece yakın derinlikler bağlanır
-          var dd = Math.hypot(a.rx - b2.rx, a.ry - b2.ry);
-          if (dd < 132) {
-            ctx.strokeStyle = 'rgba(180,214,255,' + (1 - dd / 132) * (0.05 + a.z * 0.14) + ')';
-            ctx.beginPath(); ctx.moveTo(a.rx, a.ry); ctx.lineTo(b2.rx, b2.ry); ctx.stroke();
+      // uzaktakiler önce çizilsin (derinlik sırası)
+      var order = nodes.slice().sort(function (a, b) { return b.sz - a.sz; });
+
+      // bağlantılar — 3B mesafeye göre, uzakta soluk (sis etkisi)
+      ctx.lineWidth = 1;
+      for (var i = 0; i < order.length; i++) {
+        for (var q = i + 1; q < order.length; q++) {
+          var A = order[i], B = order[q];
+          var d3 = Math.sqrt((A.sx - B.sx) * (A.sx - B.sx) + (A.sy - B.sy) * (A.sy - B.sy));
+          var lim = 150 * ((A.k + B.k) / 2);
+          if (d3 < lim) {
+            var fog = Math.min(A.k, B.k);
+            ctx.strokeStyle = 'rgba(170,208,255,' + (1 - d3 / lim) * 0.16 * fog + ')';
+            ctx.beginPath(); ctx.moveTo(A.sx, A.sy); ctx.lineTo(B.sx, B.sy); ctx.stroke();
           }
         }
       }
 
-      // imlece uzanan çizgiler + noktalar
-      for (var m = 0; m < nodes.length; m++) {
-        var nd = nodes[m];
+      // noktalar + imlece uzanan hatlar
+      order.forEach(function (n) {
         var near = 0;
         if (live) {
-          var ddm = Math.hypot(nd.rx - pX, nd.ry - pY);
-          if (ddm < 210) {
-            near = (1 - ddm / 210) * power;
-            ctx.strokeStyle = 'rgba(150,200,255,' + (near * 0.34) + ')';
-            ctx.lineWidth = 1;
-            ctx.beginPath(); ctx.moveTo(nd.rx, nd.ry); ctx.lineTo(pX, pY); ctx.stroke();
+          var dm = Math.hypot(n.sx - pX, n.sy - pY);
+          if (dm < 210) {
+            near = (1 - dm / 210) * power * n.k;
+            ctx.strokeStyle = 'rgba(150,200,255,' + (near * 0.32) + ')';
+            ctx.beginPath(); ctx.moveTo(n.sx, n.sy); ctx.lineTo(pX, pY); ctx.stroke();
           }
         }
-        ctx.fillStyle = 'rgba(214,232,255,' + (0.12 + nd.z * 0.34 + near * 0.45) + ')';
+        var alpha = (n.k - 0.62) / 0.95;                  // derinliğe göre parlaklık
+        alpha = clamp(alpha, 0.06, 1) * 0.5 + near * 0.5;
+        ctx.fillStyle = 'rgba(214,232,255,' + alpha + ')';
         ctx.beginPath();
-        ctx.arc(nd.rx, nd.ry, nd.r * (1 + near * 0.8), 0, 6.2832);
+        ctx.arc(n.sx, n.sy, n.base * n.k * (1 + near * 0.8), 0, 6.2832);
         ctx.fill();
-      }
+      });
 
       // --- kesintisiz sinyal hattı (yalnızca data-signal taşıyan canvas'ta) ---
       if (signalOn) {
@@ -196,7 +223,7 @@
         ctx.stroke();
       }
 
-      if (!RM) t += 0.016;
+      if (!RM) { t += 0.016; spinY += 0.0022; }
       raf = requestAnimationFrame(draw);
     }
 
@@ -313,33 +340,46 @@
   });
 
   /* ---------- 1b. tema (açık / koyu) ---------- */
+  // Üç durumlu tema: sistem -> açık -> koyu -> sistem
   var toggle = $('.themetoggle');
+  var MODES = ['system', 'light', 'dark'];
+  var LABELS = { system: 'Tema: sistem ayarı', light: 'Tema: açık', dark: 'Tema: koyu' };
+
+  function systemDark() {
+    try { return window.matchMedia('(prefers-color-scheme: dark)').matches; } catch (e) { return false; }
+  }
+  function savedMode() {
+    var v = null;
+    try { v = localStorage.getItem('dny-theme'); } catch (e) {}
+    return (v === 'light' || v === 'dark') ? v : 'system';
+  }
   function syncThemeLabel() {
     if (!toggle) return;
-    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
-    toggle.setAttribute('aria-pressed', String(dark));
-    toggle.setAttribute('aria-label', t(dark ? 'Açık temaya geç' : 'Koyu temaya geç'));
+    var mode = document.documentElement.getAttribute('data-theme-mode') || 'system';
+    toggle.setAttribute('aria-label', t(LABELS[mode]));
+    toggle.setAttribute('title', t(LABELS[mode]));
   }
-  function applyTheme(th) {
-    document.documentElement.setAttribute('data-theme', th);
+  function applyThemeMode(mode) {
+    var root = document.documentElement;
+    root.setAttribute('data-theme-mode', mode);
+    root.setAttribute('data-theme', (mode === 'dark' || (mode === 'system' && systemDark())) ? 'dark' : 'light');
     syncThemeLabel();
   }
-  applyTheme(document.documentElement.getAttribute('data-theme') || 'light');
+  applyThemeMode(savedMode());
+
   if (toggle) {
     toggle.addEventListener('click', function () {
-      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      applyTheme(next);
-      try { localStorage.setItem('dny-theme', next); } catch (e) {}
+      var next = MODES[(MODES.indexOf(savedMode()) + 1) % MODES.length];
+      try {
+        if (next === 'system') localStorage.removeItem('dny-theme');
+        else localStorage.setItem('dny-theme', next);
+      } catch (e) {}
+      applyThemeMode(next);
     });
   }
-  // kullanıcı seçim yapmadıysa sistem temasını takip et
   try {
     var mq = window.matchMedia('(prefers-color-scheme: dark)');
-    var onSchemeChange = function (e) {
-      var saved = null;
-      try { saved = localStorage.getItem('dny-theme'); } catch (err) {}
-      if (!saved) applyTheme(e.matches ? 'dark' : 'light');
-    };
+    var onSchemeChange = function () { if (savedMode() === 'system') applyThemeMode('system'); };
     if (mq.addEventListener) mq.addEventListener('change', onSchemeChange);
     else if (mq.addListener) mq.addListener(onSchemeChange);
   } catch (e) {}
@@ -349,9 +389,18 @@
   var progress = $('.progress');
   var callbar = $('.callbar');
 
+  var lastY = 0;
   function onScroll() {
     var y = window.scrollY || 0;
-    if (header) header.classList.toggle('is-stuck', y > 8);
+    if (header) {
+      header.classList.toggle('is-stuck', y > 8);
+      header.classList.toggle('is-shrink', y > 140);
+      // aşağı kaydırırken gizlen, yukarı kaydırınca geri gel (okuma alanı kazandırır)
+      var openMenu = document.body.classList.contains('no-scroll');
+      if (!openMenu && y > 260 && y > lastY + 6) header.classList.add('is-hidden');
+      else if (y < lastY - 6 || y < 120) header.classList.remove('is-hidden');
+      lastY = y;
+    }
     if (progress) {
       var docH = document.documentElement.scrollHeight - window.innerHeight;
       progress.style.width = (clamp(y / (docH || 1), 0, 1) * 100) + '%';
@@ -387,7 +436,12 @@
   /* ---------- 4. görsel yoksa yazıya düş ---------- */
   $$('img[data-logo]').forEach(function (img) {
     var fb = img.parentNode.querySelector('[data-logo-fallback]');
-    var fail = function () { img.hidden = true; if (fb) fb.hidden = false; };
+    var alt = img.getAttribute('data-logo-alt');
+    var tried = false;
+    var fail = function () {
+      if (alt && !tried && img.getAttribute('src') !== alt) { tried = true; img.src = alt; return; }
+      img.hidden = true; if (fb) fb.hidden = false;
+    };
     img.addEventListener('error', fail);
     if (img.complete && img.naturalWidth === 0) fail();
   });
@@ -582,35 +636,36 @@
   }
 
   /* ---------- 13. sol sinyal rayı ---------- */
-  (function rail() {
+  safe('rail', function () {
     var el = $('.rail');
     if (!el) return;
     var fill = $('.rail__fill', el), dot = $('.rail__dot', el);
     var pct = $('.rail__pct', el), sec = $('.rail__sec b', el);
+    if (!fill || !dot) return;
     var marks = $$('[data-rail]');
 
     function upd() {
       var docH = document.documentElement.scrollHeight - window.innerHeight;
       var p = clamp(window.scrollY / (docH || 1), 0, 1);
-      var track = window.innerHeight - 172;
+      var track = window.innerHeight - 278;
       fill.style.height = (track * p) + 'px';
       dot.style.transform = 'translateY(' + (track * p) + 'px)';
-      pct.textContent = '%' + Math.round(p * 100);
+      if (pct) pct.textContent = '%' + Math.round(p * 100);
 
       var cur = marks[0];
       marks.forEach(function (m) {
         if (m.getBoundingClientRect().top <= window.innerHeight * 0.42) cur = m;
       });
-      if (cur) sec.textContent = t(cur.getAttribute('data-rail'));
+      if (cur && sec) sec.textContent = t(cur.getAttribute('data-rail'));
     }
     window.addEventListener('scroll', upd, { passive: true });
     window.addEventListener('resize', upd);
     langHooks.push(upd);
     upd();
-  })();
+  });
 
   /* ---------- 14. kelime kelime aydınlanma ---------- */
-  (function words() {
+  safe('words', function () {
     var els = $$('[data-words]');
     if (!els.length) return;
 
@@ -653,7 +708,7 @@
     window.addEventListener('scroll', upd, { passive: true });
     window.addEventListener('resize', upd);
     upd();
-  })();
+  });
 
   /* ---------- 15. ikonlarda nabız ---------- */
   $$('.card__icon svg').forEach(function (svg) {
@@ -667,7 +722,7 @@
   });
 
   /* ---------- 17. yukarı çık ---------- */
-  (function toTop() {
+  safe('toTop', function () {
     var btn = $('.totop');
     if (!btn) return;
     btn.addEventListener('click', function () {
@@ -676,10 +731,10 @@
     var upd = function () { btn.classList.toggle('is-on', window.scrollY > window.innerHeight * 0.8); };
     window.addEventListener('scroll', upd, { passive: true });
     upd();
-  })();
+  });
 
   /* ---------- 18. canlı durum paneli (gerçek ölçüm) ---------- */
-  (function status() {
+  safe('status', function () {
     var box = $('[data-status]');
     if (!box) return;
     var CFG = window.DNY_STATUS || {};
@@ -707,7 +762,10 @@
         rows[item.label] = r;
       }
       $('.lbl', r).textContent = t(item.label);
-      $('.ms', r).textContent = item.ms == null ? '—' : item.ms + ' ms';
+      var msEl = $('.ms', r);
+      msEl.textContent = item.ms == null ? '—' : item.ms + ' ms';
+      // renk gerçek ölçüme göre: hızlı / normal / yavaş
+      msEl.className = 'ms ' + (item.ms == null ? 'na' : item.ms < 120 ? 'ok' : item.ms < 400 ? 'mid' : 'slow');
       var dot = $('.dot', r);
       dot.className = 'dot' + (item.up === true ? '' : item.up === false ? ' is-down' : ' is-wait');
     }
@@ -746,7 +804,45 @@
         history.push(avg);
         if (history.length > 40) history.shift();
         drawChart();
+
+        var sum = $('.status__sum', box);
+        if (!sum) {
+          sum = document.createElement('div');
+          sum.className = 'status__sum';
+          sum.innerHTML = '<span><span class="k"></span> <b class="avg"></b></span>' +
+                          '<span><span class="k2"></span> <b class="at"></b></span>';
+          if (chart) chart.parentNode.insertBefore(sum, chart.nextSibling);
+        }
+        var best = Math.min.apply(null, history);
+        $('.k', sum).textContent = t('ortalama');
+        $('.k2', sum).textContent = t('en iyi');
+        $('.avg', sum).textContent = Math.round(history.reduce(function (a, b) { return a + b; }, 0) / history.length) + ' ms';
+        $('.at', sum).textContent = best + ' ms';
       }
+    }
+
+    // --- yöntem 0: tarayıcının kendi ölçtüğü gerçek süreler ---
+    // Bu değerler uydurma değil: sayfa yüklenirken tarayıcı bunları kaydeder.
+    function browserTimings() {
+      var out = [];
+      try {
+        var nav = performance.getEntriesByType('navigation')[0];
+        if (nav) {
+          var ttfb = Math.round(nav.responseStart - nav.requestStart);
+          if (ttfb >= 0) out.push({ label: 'Sunucu yanıt süresi', up: true, ms: ttfb });
+          var dl = Math.round(nav.responseEnd - nav.responseStart);
+          if (dl >= 0) out.push({ label: 'Sayfa indirme', up: true, ms: dl });
+        }
+        var res = performance.getEntriesByType('resource') || [];
+        var css = null, img = null;
+        res.forEach(function (r) {
+          if (!css && /style\.css/.test(r.name)) css = Math.round(r.duration);
+          if (!img && /\.(png|svg)(\?|$)/.test(r.name)) img = Math.round(r.duration);
+        });
+        if (css != null) out.push({ label: 'Stil dosyası', up: true, ms: css });
+        if (img != null) out.push({ label: 'Görsel sunucusu', up: true, ms: img });
+      } catch (e) {}
+      return out;
     }
 
     // --- yöntem 1: tarayıcıdan gerçek ölçüm ---
@@ -758,9 +854,14 @@
         .then(function () { return { label: p.label, up: true, ms: Math.round(performance.now() - t0) }; })
         .catch(function () { return { label: p.label, up: false, ms: null }; });
     }
+    var timingsShown = false;
     function runProbes() {
       var list = CFG.probes || [];
-      if (!list.length) { box.hidden = true; return; }
+      if (!timingsShown) {          // sayfa açılırken ölçülenler bir kez eklenir
+        var bt = browserTimings();
+        if (bt.length) { push(bt); timingsShown = true; }
+      }
+      if (!list.length) { if (!timingsShown) box.hidden = true; return; }
       Promise.all(list.map(probeOne)).then(push);
     }
 
@@ -806,15 +907,24 @@
       langHooks.push(function () {
         noteEl.textContent = t(noteKey());
         Object.keys(rows).forEach(function (k) { $('.lbl', rows[k]).textContent = t(k); });
+        
+        // EKSİK OLAN KISIM BURASIYDI: Ortalama ve En İyi yazılarını güncelleme
+        var sum = $('.status__sum', box);
+        if (sum) {
+          var kEl = $('.k', sum);
+          var k2El = $('.k2', sum);
+          if (kEl) kEl.textContent = t('ortalama');
+          if (k2El) k2El.textContent = t('en iyi');
+        }
       });
     }
     tick();
     setInterval(tick, Math.max(CFG.interval || 25000, 10000));
     window.addEventListener('resize', drawChart);
-  })();
+  });
 
   /* ---------- 19. interaktif altyapı şeması ---------- */
-  (function infra() {
+  safe('infra', function () {
     var panel = $('[data-infra-panel]');
     if (!panel) return;
     var content = $('[data-infra-content]', panel);
@@ -896,10 +1006,10 @@
 
     langHooks.push(function () { render(current); });
     render(current);
-  })();
+  });
 
   /* ---------- 20. canlı kesintisiz çalışma oranı ---------- */
-  (function liveUptime() {
+  safe('liveUptime', function () {
     var box = $('[data-live-uptime]');
     if (!box) return;
     var CFG = window.DNY_STATUS || {};
@@ -920,10 +1030,10 @@
         box.hidden = false;
       })
       .catch(function () {});
-  })();
+  });
 
   /* ---------- 21. alt sayfa hero paralaksı ---------- */
-  (function parallax() {
+  safe('parallax', function () {
     var el = $('[data-parallax]');
     if (!el || RM) return;
     var cv = $('.pagehead .aurora');
@@ -936,10 +1046,10 @@
     }
     window.addEventListener('scroll', upd, { passive: true });
     upd();
-  })();
+  });
 
   /* ---------- 22. hizmet bento kutuları ---------- */
-  (function serviceTiles() {
+  safe('serviceTiles', function () {
     var tiles = $$('.tile--svc');
     if (!tiles.length) return;
 
@@ -987,10 +1097,10 @@
     }
     fromHash();
     window.addEventListener('hashchange', fromHash);
-  })();
+  });
 
   /* ---------- 23. referans sektör haritası + filtre ---------- */
-  (function sectorMap() {
+  safe('sectorMap', function () {
     var list = $('[data-reflist]');
     if (!list) return;
     var refs = $$('.ref', list);
@@ -1030,10 +1140,10 @@
       });
     });
     apply('all');
-  })();
+  });
 
   /* ---------- 24. adımlı form ---------- */
-  (function formSteps() {
+  safe('formSteps', function () {
     var form = $('#iletisimForm[data-steps]');
     if (!form) return;
     var panels = $$('.fpanel', form);
@@ -1079,7 +1189,7 @@
     });
     show(0);
     form.__gotoStep = show;
-  })();
+  });
 
   /* ---------- 12. sayfa geçişi ---------- */
   if (!RM) {

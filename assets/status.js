@@ -39,7 +39,8 @@ window.DNY_STATUS = {
   // mode:'probe' için ölçülecek adresler.
   // Buraya gerçekten sizin işlettiğiniz, dışarıya açık adresleri yazın.
   probes: [
-    { label: 'Web sunucusu', url: 'assets/favicon.svg' }
+    { label: 'Web sunucusu', url: 'assets/favicon.svg' },
+    { label: 'Statik dosyalar', url: 'assets/style.css' }
     // Örnekler — kendi adreslerinizle değiştirin:
     // { label: 'Posta sunucusu', url: 'https://mail.dny.com.tr/favicon.ico' },
     // { label: 'Müşteri portalı', url: 'https://portal.dny.com.tr/favicon.ico' }

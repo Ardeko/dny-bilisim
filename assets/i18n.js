@@ -13,6 +13,18 @@ window.DNY_I18N = {
 
     /* ---------- menü / genel ---------- */
     "Ana sayfa": "Home",
+    "İçeriğe atla": "Skip to content",
+    "Sekiz hizmetin tamamı": "All eight services",
+    "Envanter, risk ve bütçe raporu": "Inventory, risk and budget report",
+    "Sunucu, iş istasyonu, çevre birimi": "Servers, workstations, peripherals",
+    "Kablolama, switch, kablosuz ağ": "Cabling, switches, wireless",
+    "Güvenlik duvarı, kamera, yetkiler": "Firewall, cameras, permissions",
+    "7/24 uzak ve yerinde müdahale": "24/7 remote and on-site response",
+    "Kurumsal site, e-ticaret, özel yazılım": "Corporate sites, e-commerce, custom software",
+    "Barındırma, SSL, kurumsal e-posta": "Hosting, SSL, corporate email",
+    "Otomatik yedek, geri dönüş testi": "Automated backups, restore testing",
+    "Donanım ve sistem": "Hardware and systems",
+    "Web ve yazılım": "Web and software",
     "Hakkımızda": "About",
     "Hizmetler": "Services",
     "Referanslar": "Clients",
@@ -35,8 +47,9 @@ window.DNY_I18N = {
     "Mobil menü": "Mobile menu",
     "Sayfa yolu": "Breadcrumb",
     "Menüyü aç": "Open menu",
-    "Koyu temaya geç": "Switch to dark theme",
-    "Açık temaya geç": "Switch to light theme",
+    "Tema: sistem ayarı": "Theme: system setting",
+    "Tema: açık": "Theme: light",
+    "Tema: koyu": "Theme: dark",
     "DNY Bilişim — ana sayfa": "DNY Bilişim — home",
     "Destek için yazın — destek@dny.com.tr": "Need support? Write to destek@dny.com.tr",
     "7/24 Destek": "Support is open 24/7",
@@ -601,9 +614,26 @@ window.DNY_I18N = {
     "Başa dön": "Back to top",
 
     /* canlı durum paneli */
+    "Sayfa bulunamadı — DNY Bilişim": "Page not found — DNY Bilişim",
+    "Hata 404": "Error 404",
+    "Bu adreste bir sayfa yok.": "There is no page at this address.",
+    "Bağlantı yanlış yazılmış, sayfa taşınmış ya da adres artık kullanılmıyor olabilir. Aşağıdan devam edebilirsiniz.":
+      "The link may be mistyped, the page may have moved, or the address may no longer be in use. You can continue from below.",
+    "Ana sayfaya dön": "Back to home",
+    "Sayfalar": "Pages",
+    "Bağlantı kurulamadı": "Connection failed",
+    "İstenen adrese ulaşılamıyor.": "The requested address cannot be reached.",
+    "404 — kaynak bulunamadı": "404 — resource not found",
     "Sistem durumu": "System status",
+    "ortalama": "average",
+    "en iyi": "best",
     "canlı": "live",
     "Web sunucusu": "Web server",
+    "Statik dosyalar": "Static files",
+    "Sunucu yanıt süresi": "Server response time",
+    "Sayfa indirme": "Page download",
+    "Stil dosyası": "Stylesheet",
+    "Görsel sunucusu": "Image server",
     "Posta sunucusu": "Mail server",
     "Müşteri portalı": "Client portal",
     "7/24 destek — bize yazın": "24/7 support — write to us",
@@ -637,4 +667,19 @@ window.DNY_I18N = {
     "hakkında bilgi almak istiyorum.": "— I would like more information.",
     "Web sitesi talebi": "Website enquiry"
   }
-};
+};// --- DİL DEĞİŞTİĞİNDE STATUS PANELİNİ YENİLEME KODU ---
+document.addEventListener('DOMContentLoaded', () => {
+  // Sitedeki dil butonlarını buluyoruz
+  const langButtons = document.querySelectorAll('[data-lang]'); 
+  
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Çeviri işleminin tamamlanması için çok kısa (50ms) bir süre bekleyip grafiği güncelliyoruz
+      setTimeout(() => {
+        if (window.DNY_STATUS && typeof window.DNY_STATUS.update === 'function') {
+          window.DNY_STATUS.update();
+        }
+      }, 50);
+    });
+  });
+});

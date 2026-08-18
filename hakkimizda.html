@@ -12,6 +12,15 @@
 <meta property="og:title" content="Hakkımızda — DNY Bilişim | 1996'dan beri kurumsal bilişim">
 <meta property="og:description" content="1996'dan beri kurumların bilişim altyapısını kuran, koruyan ve kesintisiz tutan DNY Bilişim'in hikâyesi, tarihçesi ve çalışma ilkeleri.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://dny.com.tr/">
+<meta property="og:site_name" content="DNY Bilişim">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:image" content="https://dny.com.tr/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#071129">
 <meta name="color-scheme" content="light dark">
 <script>(function(){var l=null;try{l=new URLSearchParams(location.search).get('lang')}catch(e){}
 if(!l){try{l=localStorage.getItem('dny-lang')}catch(e){}}
@@ -31,18 +40,32 @@ var r=document.documentElement;r.setAttribute('data-theme-mode',m);r.setAttribut
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+<a class="skip" href="#icerik">İçeriğe atla</a>
 <div class="progress"></div>
 
 <header class="header">
   <div class="wrap header__in">
     <a href="index.html" class="brand" aria-label="DNY Bilişim — ana sayfa">
-      <img src="assets/ardeko.png" alt="DNY Bilişim" style="height: 64px; width: auto;" data-logo data-logo-alt="assets/ardeko.png">
+      <img src="assets/ardeko.png" srcset="assets/ardeko-320.png 320w, assets/ardeko.png 1983w" sizes="(max-width:560px) 120px, 180px" width="1983" height="793" alt="DNY Bilişim" data-logo data-logo-alt="assets/dny.png">
       <span class="brand__fallback" data-logo-fallback hidden><i></i>DNY</span>
     </a>
     <nav class="mainnav" aria-label="Ana menü">
       <a href="index.html">Ana sayfa</a>
       <a href="hakkimizda.html" aria-current="page">Hakkımızda</a>
-      <a href="hizmetler.html">Hizmetler</a>
+      <span class="has-menu">
+        <a href="hizmetler.html">Hizmetler</a>
+        <div class="megamenu">
+          <a href="hizmetler.html#danismanlik">Bilişim danışmanlığı<small>Envanter, risk ve bütçe raporu</small></a>
+          <a href="hizmetler.html#donanim">Donanım ve sistem<small>Sunucu, iş istasyonu, çevre birimi</small></a>
+          <a href="hizmetler.html#ag">Ağ ve kablolama<small>Kablolama, switch, kablosuz ağ</small></a>
+          <a href="hizmetler.html#guvenlik">Güvenlik çözümleri<small>Güvenlik duvarı, kamera, yetkiler</small></a>
+          <a href="hizmetler.html#destek">Teknik destek<small>7/24 uzak ve yerinde müdahale</small></a>
+          <a href="hizmetler.html#web">Web ve yazılım<small>Kurumsal site, e-ticaret, özel yazılım</small></a>
+          <a href="hizmetler.html#hosting">Hosting ve alan adı<small>Barındırma, SSL, kurumsal e-posta</small></a>
+          <a href="hizmetler.html#yedekleme">Yedekleme<small>Otomatik yedek, geri dönüş testi</small></a>
+          <a class="all" href="hizmetler.html">Sekiz hizmetin tamamı <svg viewBox="0 0 16 16" fill="none"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </span>
       <a href="referanslar.html">Referanslar</a>
       <a href="uzak-destek.html">Uzak destek</a>
       <a href="gerekli-yazilimlar.html">Gerekli yazılımlar</a>
@@ -83,13 +106,14 @@ var r=document.documentElement;r.setAttribute('data-theme-mode',m);r.setAttribut
 </nav>
 
 <aside class="rail" aria-hidden="true">
+  <span class="rail__pct">%0</span>
   <div class="rail__line"></div>
   <div class="rail__fill"></div>
   <div class="rail__dot"></div>
   <div class="rail__sec"><b>Başlangıç</b></div>
 </aside>
 
-<main class="fade">
+<main class="fade" id="icerik" tabindex="-1">
 
   <section class="pagehead on-dark" data-rail="Hakkımızda">
     <canvas class="aurora" data-signal aria-hidden="true"></canvas>
@@ -188,7 +212,7 @@ var r=document.documentElement;r.setAttribute('data-theme-mode',m);r.setAttribut
   <div class="wrap">
     <div class="footer__grid">
       <div>
-        <img src="assets/dny.png" alt="DNY Bilişim" style="height:32px;width:auto" data-logo data-logo-alt="assets/ardeko.png">
+        <img src="assets/dny.png" alt="DNY Bilişim" data-logo data-logo-alt="assets/ardeko.png">
         <span class="brand__fallback" data-logo-fallback hidden><i></i>DNY</span>
         <p class="footer__about">DNY Bilişim Donanım ve Danışmanlık Hizmetleri. 1996'dan beri İstanbul'da kurumsal bilişim altyapısı, güvenlik ve destek çözümleri.</p>
         <a href="mailto:destek@dny.com.tr" class="footer__mail"><small>7/24 destek</small>destek@dny.com.tr</a>
@@ -226,7 +250,7 @@ var r=document.documentElement;r.setAttribute('data-theme-mode',m);r.setAttribut
     </div>
 
     <div class="wordmark">
-  <img src="assets/ardeko.png" alt="Ardeko" style="max-width:340px;width:100%;height:auto;margin:0 auto;opacity:.85">
+  <img src="assets/ardeko.png" srcset="assets/ardeko-320.png 320w, assets/ardeko.png 1983w" sizes="(max-width:640px) 260px, 340px" width="1983" height="793" alt="Ardeko" loading="lazy" style="max-width:340px;width:100%;height:auto;margin:0 auto;opacity:.85">
 </div>
 
     <div class="footer__bar">
@@ -245,5 +269,6 @@ var r=document.documentElement;r.setAttribute('data-theme-mode',m);r.setAttribut
 <script src="assets/i18n.js"></script>
 <script src="assets/status.js"></script>
 <script src="assets/main.js"></script>
+<script src="assets/assistant.js"></script>
 </body>
 </html>
