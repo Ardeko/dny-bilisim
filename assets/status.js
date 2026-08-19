@@ -29,25 +29,32 @@
        [{"label":"Sunucu-01","up":true,"ms":12}, ...]
      Bir PHP dosyası bu JSON'u üretebilir.
 
+   mode: 'auto'  (VARSAYILAN — önerilen)
+     Önce durum.json aranır. Sunucunuzdaki ajan bu dosyayı
+     üretmişse gerçek sunucu verisi gösterilir. Dosya yoksa
+     otomatik olarak tarayıcı ölçümüne (probe) düşer.
+     Ajanı kurduğunuz an site kendiliğinden gerçek veriye geçer;
+     sitede hiçbir değişiklik yapmanız gerekmez.
+
    mode: 'off'
      Panel tamamen gizlenir.
    ========================================================= */
 window.DNY_STATUS = {
 
-  mode: 'probe',
+  mode: 'auto',
 
   // mode:'probe' için ölçülecek adresler.
   // Buraya gerçekten sizin işlettiğiniz, dışarıya açık adresleri yazın.
   probes: [
     { label: 'Web sunucusu', url: 'assets/favicon.svg' },
-    { label: 'Statik dosyalar', url: 'assets/style.css' }
+    { label: 'Statik dosya sunucusu', url: 'assets/style.css' }
     // Örnekler — kendi adreslerinizle değiştirin:
     // { label: 'Posta sunucusu', url: 'https://mail.dny.com.tr/favicon.ico' },
     // { label: 'Müşteri portalı', url: 'https://portal.dny.com.tr/favicon.ico' }
   ],
 
   uptimeRobotKey: '',   // mode:'uptimerobot' ise salt-okunur anahtar
-  jsonUrl: '',          // mode:'json' ise JSON adresi
+  jsonUrl: 'durum.json',   // ajanın ürettiği dosya (auto ve json modu)
 
   interval: 25000       // yenileme aralığı (milisaniye)
 };

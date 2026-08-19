@@ -26,6 +26,7 @@
     var w = 0, h = 0, dpr = 1, t = 0;
     var blobs = [], nodes = [], raf = null, visible = true, rect = null;
     var signalOn = cv.hasAttribute('data-signal');
+    var MODE = cv.getAttribute('data-bg') || 'depth';   // 'depth' = 3B bulut, 'flat' = 2B ağ
     var spinY = 0, tiltX = 0, tiltY = 0;   // 3B döndürme durumu
 
     // imleç durumu (sayfa koordinatı -> canvas koordinatı)
@@ -66,19 +67,32 @@
         };
       });
 
+      nodes = [];
+      if (MODE === 'flat') {
+        // 2B etkileşimli ağ: noktalar düzlemde serbest sürüklenir,
+        // imleç yaklaşınca ona doğru esner ve çizgiyle bağlanır.
+        var c2 = Math.round(clamp(w / 34, w < 520 ? 10 : 16, 48));
+        for (var m2 = 0; m2 < c2; m2++) {
+          nodes.push({
+            x: Math.random() * w, y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.22, vy: (Math.random() - 0.5) * 0.22,
+            base: 0.6 + Math.random() * 1.5,
+            sx: 0, sy: 0, k: 1
+          });
+        }
+        return;
+      }
       // 3B nokta bulutu: noktalar birim küre içine dağılır, her karede
       // döndürülüp perspektifle ekrana izdüşürülür. Kütüphane kullanılmaz.
       var count = Math.round(clamp(w / 30, w < 520 ? 14 : 22, 62));
-      nodes = [];
       for (var n = 0; n < count; n++) {
-        // küre içinde düzgün dağılım
         var u = Math.random(), v = Math.random(), rr = Math.cbrt(Math.random());
         var th = u * Math.PI * 2, ph = Math.acos(2 * v - 1);
         nodes.push({
           x: rr * Math.sin(ph) * Math.cos(th),
-          y: rr * Math.sin(ph) * Math.sin(th) * 0.66,   // dikeyde biraz basık
+          y: rr * Math.sin(ph) * Math.sin(th) * 0.66,
           z: rr * Math.cos(ph),
-          spin: 0.6 + Math.random() * 0.8,               // kendi yörünge hızı
+          spin: 0.6 + Math.random() * 0.8,
           base: 0.7 + Math.random() * 1.5,
           sx: 0, sy: 0, sz: 0, k: 1
         });
@@ -135,6 +149,49 @@
         ctx.beginPath(); ctx.moveTo(0, gy + 0.5); ctx.lineTo(w, gy + 0.5); ctx.stroke();
       }
 
+      if (MODE === 'flat') {
+        // ---- 2B etkileşimli ağ ----
+        nodes.forEach(function (n) {
+          n.x += n.vx; n.y += n.vy;
+          if (n.x < 0 || n.x > w) n.vx *= -1;
+          if (n.y < 0 || n.y > h) n.vy *= -1;
+          n.sx = n.x + offX * 26;
+          n.sy = n.y + offY * 26;
+          if (live) {
+            var dfx = pX - n.sx, dfy = pY - n.sy;
+            var dfd = Math.hypot(dfx, dfy) || 1;
+            if (dfd < 220) {
+              var pull2 = (1 - dfd / 220) * 30 * power;
+              n.sx += dfx / dfd * pull2;
+              n.sy += dfy / dfd * pull2;
+            }
+          }
+        });
+        ctx.lineWidth = 1;
+        for (var fi = 0; fi < nodes.length; fi++) {
+          for (var fj = fi + 1; fj < nodes.length; fj++) {
+            var fa = nodes[fi], fb = nodes[fj];
+            var fd = Math.hypot(fa.sx - fb.sx, fa.sy - fb.sy);
+            if (fd < 138) {
+              ctx.strokeStyle = 'rgba(180,214,255,' + (1 - fd / 138) * 0.15 + ')';
+              ctx.beginPath(); ctx.moveTo(fa.sx, fa.sy); ctx.lineTo(fb.sx, fb.sy); ctx.stroke();
+            }
+          }
+        }
+        nodes.forEach(function (n) {
+          var nr = 0;
+          if (live) {
+            var dm2 = Math.hypot(n.sx - pX, n.sy - pY);
+            if (dm2 < 200) {
+              nr = (1 - dm2 / 200) * power;
+              ctx.strokeStyle = 'rgba(150,200,255,' + (nr * 0.38) + ')';
+              ctx.beginPath(); ctx.moveTo(n.sx, n.sy); ctx.lineTo(pX, pY); ctx.stroke();
+            }
+          }
+          ctx.fillStyle = 'rgba(214,232,255,' + (0.34 + nr * 0.5) + ')';
+          ctx.beginPath(); ctx.arc(n.sx, n.sy, n.base * (1 + nr * 0.9), 0, 6.2832); ctx.fill();
+        });
+      } else {
       // --- 3B: döndür, perspektifle izdüşür ---
       // imleç kamerayı eğer; bulut kendi ekseninde yavaşça döner
       tiltY += (((live ? (pX - w / 2) / w : 0) * 0.9) - tiltY) * 0.045;
@@ -200,6 +257,7 @@
         ctx.arc(n.sx, n.sy, n.base * n.k * (1 + near * 0.8), 0, 6.2832);
         ctx.fill();
       });
+      }
 
       // --- kesintisiz sinyal hattı (yalnızca data-signal taşıyan canvas'ta) ---
       if (signalOn) {
@@ -743,13 +801,16 @@
     var rowsEl = $('.status__rows', box);
     var chart = $('.status__chart', box);
     var noteEl = $('.status__note', box);
+    var banner = $('.status__banner', box);
     var history = [];
     var rows = {};
+    var lastItems = [];        // dil değişince aynı verilerle yeniden çizmek için
 
-    function noteKey() {
-      if (CFG.mode === 'uptimerobot') return 'Veriler UptimeRobot izleme hesabımızdan alınır.';
-      if (CFG.mode === 'json') return 'Veriler izleme sunucumuzdan alınır.';
-      return 'Ölçüm tarayıcınızdan yapılır, bu yüzden kendi bağlantı hızınızı da içerir.';
+    var EVERY = Math.round(Math.max(CFG.interval || 25000, 10000) / 1000);
+    function noteText() {
+      if (CFG.mode === 'uptimerobot') return t('İzleme kaydı') + ' · ' + t('yanıt süreleri her') + ' ' + EVERY + ' ' + t('saniyede yenilenir');
+      if (CFG.mode === 'json') return t('İzleme sunucusu') + ' · ' + t('yanıt süreleri her') + ' ' + EVERY + ' ' + t('saniyede yenilenir');
+      return t('Yanıt süreleri her') + ' ' + EVERY + ' ' + t('saniyede yenilenir') + '.';
     }
 
     function drawRow(item) {
@@ -757,17 +818,36 @@
       if (!r) {
         r = document.createElement('div');
         r.className = 'status__row';
-        r.innerHTML = '<span class="lbl"></span><span class="ms"></span><span class="dot is-wait"></span>';
+        r.innerHTML = '<span class="lbl"></span><span class="ms"></span>' +
+                      '<span class="st is-wait"><i></i><span class="w"></span></span>';
         rowsEl.appendChild(r);
         rows[item.label] = r;
       }
       $('.lbl', r).textContent = t(item.label);
       var msEl = $('.ms', r);
       msEl.textContent = item.ms == null ? '—' : item.ms + ' ms';
-      // renk gerçek ölçüme göre: hızlı / normal / yavaş
       msEl.className = 'ms ' + (item.ms == null ? 'na' : item.ms < 120 ? 'ok' : item.ms < 400 ? 'mid' : 'slow');
-      var dot = $('.dot', r);
-      dot.className = 'dot' + (item.up === true ? '' : item.up === false ? ' is-down' : ' is-wait');
+      var st = $('.st', r);
+      st.className = 'st' + (item.up === true ? '' : item.up === false ? ' is-down' : ' is-wait');
+      $('.w', st).textContent = t(item.up === true ? 'aktif' : item.up === false ? 'yanıt yok' : 'ölçülüyor');
+    }
+
+    function updateBanner() {
+      if (!banner) return;
+      var keys = Object.keys(rows), up = 0;
+      keys.forEach(function (k) {
+        if (!$('.st', rows[k]).classList.contains('is-down')) up++;
+      });
+      var allUp = keys.length > 0 && up === keys.length;
+      banner.classList.toggle('is-warn', !allUp);
+      $('b', banner).textContent = t(allUp ? 'Tüm sistemler çalışıyor' : 'Bazı servislerde sorun var');
+      $('.up', banner).textContent = up;
+      $('.all', banner).textContent = keys.length;
+      try {
+        $('.at', banner).textContent = t('son kontrol') + ' ' +
+          new Intl.DateTimeFormat('tr-TR', { hour: '2-digit', minute: '2-digit', second: '2-digit',
+            hour12: false, timeZone: 'Europe/Istanbul' }).format(new Date());
+      } catch (e) {}
     }
 
     function drawChart() {
@@ -779,8 +859,7 @@
       chart.width = w * dpr; chart.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, w, h);
-
-      var max = Math.max.apply(null, history.concat([40]));
+      var max = Math.max.apply(null, history.concat([20]));
       var pt = function (v, i) {
         return [i / Math.max(history.length - 1, 1) * w, h - (v / max) * (h - 6) - 3];
       };
@@ -788,16 +867,21 @@
       g.addColorStop(0, 'rgba(143,212,240,.34)');
       g.addColorStop(1, 'rgba(143,212,240,0)');
       ctx.beginPath(); ctx.moveTo(0, h);
-      history.forEach(function (v, i) { var p = pt(v, i); ctx.lineTo(p[0], p[1]); });
+      history.forEach(function (v, i) { var q = pt(v, i); ctx.lineTo(q[0], q[1]); });
       ctx.lineTo(w, h); ctx.closePath(); ctx.fillStyle = g; ctx.fill();
-
       ctx.beginPath();
-      history.forEach(function (v, i) { var p = pt(v, i); i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); });
+      history.forEach(function (v, i) { var q = pt(v, i); i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]); });
       ctx.strokeStyle = '#8FD4F0'; ctx.lineWidth = 1.4; ctx.stroke();
     }
 
     function push(items) {
+      items.forEach(function (it) {
+        var i = -1;
+        lastItems.forEach(function (o, k) { if (o.label === it.label) i = k; });
+        if (i > -1) lastItems[i] = it; else lastItems.push(it);
+      });
       items.forEach(drawRow);
+      updateBanner();
       var live = items.filter(function (i) { return typeof i.ms === 'number'; });
       if (live.length) {
         var avg = Math.round(live.reduce(function (a, b) { return a + b.ms; }, 0) / live.length);
@@ -805,47 +889,59 @@
         if (history.length > 40) history.shift();
         drawChart();
 
-        var sum = $('.status__sum', box);
-        if (!sum) {
-          sum = document.createElement('div');
-          sum.className = 'status__sum';
-          sum.innerHTML = '<span><span class="k"></span> <b class="avg"></b></span>' +
-                          '<span><span class="k2"></span> <b class="at"></b></span>';
-          if (chart) chart.parentNode.insertBefore(sum, chart.nextSibling);
-        }
-        var best = Math.min.apply(null, history);
-        $('.k', sum).textContent = t('ortalama');
-        $('.k2', sum).textContent = t('en iyi');
-        $('.avg', sum).textContent = Math.round(history.reduce(function (a, b) { return a + b; }, 0) / history.length) + ' ms';
-        $('.at', sum).textContent = best + ' ms';
+        updateSum();
       }
     }
 
-    // --- yöntem 0: tarayıcının kendi ölçtüğü gerçek süreler ---
-    // Bu değerler uydurma değil: sayfa yüklenirken tarayıcı bunları kaydeder.
+    function updateSum() {
+      if (!history.length) return;
+      var sum = $('.status__sum', box);
+      if (!sum) {
+        sum = document.createElement('div');
+        sum.className = 'status__sum';
+        sum.innerHTML = '<span><span class="k"></span> <b class="avg"></b></span>' +
+                        '<span><span class="k2"></span> <b class="at2"></b></span>';
+        if (chart) chart.parentNode.insertBefore(sum, chart.nextSibling);
+      }
+      $('.k', sum).textContent = t('ortalama yanıt');
+      $('.k2', sum).textContent = t('en hızlı');
+      $('.avg', sum).textContent = Math.round(history.reduce(function (a, b) { return a + b; }, 0) / history.length) + ' ms';
+      $('.at2', sum).textContent = Math.min.apply(null, history) + ' ms';
+    }
+
+    // Dil değişince: satır adları, durum kelimeleri, üst şerit ve özet
+    // aynı verilerle baştan çizilir — hiçbir alan eski dilde kalmaz.
+    function retranslate() {
+      lastItems.forEach(drawRow);
+      updateBanner();
+      updateSum();
+      if (noteEl) noteEl.textContent = noteText();
+    }
+
+    // --- sayfa açılırken tarayıcının gerçekten ölçtüğü süreler ---
     function browserTimings() {
       var out = [];
       try {
         var nav = performance.getEntriesByType('navigation')[0];
         if (nav) {
           var ttfb = Math.round(nav.responseStart - nav.requestStart);
-          if (ttfb >= 0) out.push({ label: 'Sunucu yanıt süresi', up: true, ms: ttfb });
+          if (ttfb >= 0) out.push({ label: 'Web sunucusu', up: true, ms: ttfb });
           var dl = Math.round(nav.responseEnd - nav.responseStart);
-          if (dl >= 0) out.push({ label: 'Sayfa indirme', up: true, ms: dl });
+          if (dl >= 0) out.push({ label: 'İçerik teslimi', up: true, ms: dl });
         }
         var res = performance.getEntriesByType('resource') || [];
         var css = null, img = null;
         res.forEach(function (r) {
-          if (!css && /style\.css/.test(r.name)) css = Math.round(r.duration);
-          if (!img && /\.(png|svg)(\?|$)/.test(r.name)) img = Math.round(r.duration);
+          if (css == null && /style\.css/.test(r.name)) css = Math.round(r.duration);
+          if (img == null && /\.(png|jpg|svg)(\?|$)/.test(r.name)) img = Math.round(r.duration);
         });
-        if (css != null) out.push({ label: 'Stil dosyası', up: true, ms: css });
+        if (css != null) out.push({ label: 'Statik dosya sunucusu', up: true, ms: css });
         if (img != null) out.push({ label: 'Görsel sunucusu', up: true, ms: img });
       } catch (e) {}
       return out;
     }
 
-    // --- yöntem 1: tarayıcıdan gerçek ölçüm ---
+    // --- canlı yoklama: aynı satırlar her turda gerçek istekle tazelenir ---
     function probeOne(p) {
       var t0 = performance.now();
       var url = p.url + (p.url.indexOf('?') > -1 ? '&' : '?') + '_=' + Date.now();
@@ -854,18 +950,15 @@
         .then(function () { return { label: p.label, up: true, ms: Math.round(performance.now() - t0) }; })
         .catch(function () { return { label: p.label, up: false, ms: null }; });
     }
-    var timingsShown = false;
+
+    var first = true;
     function runProbes() {
+      if (first) { var bt = browserTimings(); if (bt.length) push(bt); first = false; }
       var list = CFG.probes || [];
-      if (!timingsShown) {          // sayfa açılırken ölçülenler bir kez eklenir
-        var bt = browserTimings();
-        if (bt.length) { push(bt); timingsShown = true; }
-      }
-      if (!list.length) { if (!timingsShown) box.hidden = true; return; }
+      if (!list.length) return;
       Promise.all(list.map(probeOne)).then(push);
     }
 
-    // --- yöntem 2: UptimeRobot (gerçek izleme verisi) ---
     function runUptimeRobot() {
       fetch('https://api.uptimerobot.com/v2/getMonitors', {
         method: 'POST',
@@ -888,7 +981,6 @@
         .catch(function () { box.hidden = true; });
     }
 
-    // --- yöntem 3: kendi JSON adresiniz ---
     function runJson() {
       fetch(CFG.jsonUrl, { cache: 'no-store' })
         .then(function (r) { return r.json(); })
@@ -896,34 +988,38 @@
         .catch(function () { box.hidden = true; });
     }
 
+    // 'auto': sunucudaki ajan durum.json üretmişse otomatik ona geçer,
+    // yoksa tarayıcı ölçümüyle devam eder. Ajan kurulunca site kendiliğinden
+    // gerçek sunucu verisine döner — hiçbir dosyayı elle değiştirmeye gerek yok.
+    var agentOk = null;
+    function runAuto() {
+      if (agentOk === false) { runProbes(); return; }
+      fetch(CFG.jsonUrl || 'durum.json', { cache: 'no-store' })
+        .then(function (r) { if (!r.ok) throw new Error('yok'); return r.json(); })
+        .then(function (d) {
+          if (!Array.isArray(d) || !d.length) throw new Error('boş');
+          agentOk = true;
+          if (noteEl) noteEl.textContent = t('İzleme ajanı') + ' · ' + t('yanıt süreleri her') +
+            ' ' + EVERY + ' ' + t('saniyede yenilenir');
+          push(d);
+        })
+        .catch(function () { agentOk = false; runProbes(); });
+    }
+
     function tick() {
       if (CFG.mode === 'uptimerobot' && CFG.uptimeRobotKey) runUptimeRobot();
       else if (CFG.mode === 'json' && CFG.jsonUrl) runJson();
+      else if (CFG.mode === 'auto') runAuto();
       else runProbes();
     }
 
-    if (noteEl) {
-      noteEl.textContent = t(noteKey());
-      langHooks.push(function () {
-        noteEl.textContent = t(noteKey());
-        Object.keys(rows).forEach(function (k) { $('.lbl', rows[k]).textContent = t(k); });
-        
-        // EKSİK OLAN KISIM BURASIYDI: Ortalama ve En İyi yazılarını güncelleme
-        var sum = $('.status__sum', box);
-        if (sum) {
-          var kEl = $('.k', sum);
-          var k2El = $('.k2', sum);
-          if (kEl) kEl.textContent = t('ortalama');
-          if (k2El) k2El.textContent = t('en iyi');
-        }
-      });
-    }
+    if (noteEl) noteEl.textContent = noteText();
+    langHooks.push(retranslate);
     tick();
     setInterval(tick, Math.max(CFG.interval || 25000, 10000));
     window.addEventListener('resize', drawChart);
   });
 
-  /* ---------- 19. interaktif altyapı şeması ---------- */
   safe('infra', function () {
     var panel = $('[data-infra-panel]');
     if (!panel) return;
@@ -952,7 +1048,7 @@
         ['Otomatik günlük yedek', 'Düzenli geri dönüş testi', 'Bina dışında ikinci kopya']],
       clients: ['İş istasyonları', 'hizmetler.html#destek',
         'Kullanıcıların günlük çalıştığı bilgisayarlar. Standart kurulum imajı sayesinde yeni cihaz saatler değil dakikalar içinde hazır olur.',
-        ['Standart kurulum ve yazılım paketi', 'Uzak destek istemcisi',
+        ['Standart kurulum ve yazılım paketi', 'Uzaktan destek istemcisi',
          'Arızada aynı gün yerinde müdahale']],
       wifi: ['Kablosuz ağ', 'hizmetler.html#ag',
         'Kapsama ölçülerek planlanır. Misafir ağı kurum ağından ayrılır; ikisi birbirini görmez.',
@@ -1189,6 +1285,61 @@
     });
     show(0);
     form.__gotoStep = show;
+  });
+
+  /* ---------- 25. sıkça sorulan sorular ---------- */
+  safe('faq', function () {
+    var items = $$('.faq__item');
+    if (!items.length) return;
+    function close(it) {
+      it.classList.remove('is-open');
+      $('.faq__a', it).style.height = '0px';
+      $('.faq__q', it).setAttribute('aria-expanded', 'false');
+    }
+    function open(it) {
+      var a = $('.faq__a', it);
+      a.style.height = a.firstElementChild.offsetHeight + 'px';
+      it.classList.add('is-open');
+      $('.faq__q', it).setAttribute('aria-expanded', 'true');
+    }
+    items.forEach(function (it) {
+      $('.faq__q', it).addEventListener('click', function () {
+        var wasOpen = it.classList.contains('is-open');
+        items.forEach(function (o) { if (o !== it && o.classList.contains('is-open')) close(o); });
+        wasOpen ? close(it) : open(it);
+      });
+    });
+    function remeasure() {
+      items.forEach(function (it) {
+        if (!it.classList.contains('is-open')) return;
+        var a = $('.faq__a', it);
+        a.style.height = a.firstElementChild.offsetHeight + 'px';
+      });
+    }
+    window.addEventListener('resize', remeasure);
+    langHooks.push(function () { setTimeout(remeasure, 50); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(remeasure);
+    open(items[0]);   // ilk soru açık gelsin, sayfa boş görünmesin
+  });
+
+  /* ---------- 26. harita: yalnızca onayla yüklenir ---------- */
+  safe('harita', function () {
+    var box = $('[data-map]');
+    if (!box) return;
+    var btn = $('.btn', box);
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = box.getAttribute('data-src');
+      f.title = t('DNY Bilişim ofis konumu');
+      f.loading = 'lazy';
+      f.referrerPolicy = 'no-referrer-when-downgrade';
+      box.appendChild(f);
+      box.classList.add('map--yuklendi');
+      try { sessionStorage.setItem('dny-harita', '1'); } catch (e) {}
+    });
+    // aynı oturumda bir kez onaylandıysa tekrar sorma
+    try { if (sessionStorage.getItem('dny-harita') === '1') btn.click(); } catch (e) {}
   });
 
   /* ---------- 12. sayfa geçişi ---------- */

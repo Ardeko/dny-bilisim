@@ -26,9 +26,9 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dny.com.tr/uzak-destek.html</loc>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://dny.com.tr/uzak-destek.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://dny.com.tr/uzak-destek.html?lang=en"/>
+    <loc>https://dny.com.tr/uzaktan-destek.html</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://dny.com.tr/uzaktan-destek.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dny.com.tr/uzaktan-destek.html?lang=en"/>
     <priority>0.8</priority>
   </url>
   <url>
@@ -42,5 +42,21 @@
     <xhtml:link rel="alternate" hreflang="tr" href="https://dny.com.tr/iletisim.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://dny.com.tr/iletisim.html?lang=en"/>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dny.com.tr/sss.html</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://dny.com.tr/sss.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dny.com.tr/sss.html?lang=en"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dny.com.tr/gizlilik.html</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://dny.com.tr/gizlilik.html"/>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://dny.com.tr/cerez.html</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://dny.com.tr/cerez.html"/>
+    <priority>0.3</priority>
   </url>
 </urlset>

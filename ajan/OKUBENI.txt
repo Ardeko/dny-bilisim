@@ -1,0 +1,59 @@
+DNY BİLİŞİM — İZLEME AJANI
+==========================
+
+NE İŞE YARAR
+------------
+Sitedeki "Sistem durumu" paneli, varsayılan olarak ziyaretçinin
+tarayıcısından ölçüm yapar. Bu ölçüm ziyaretçinin internet
+bağlantısını da içerdiği için 20-200 ms bandında çıkar ve
+yalnızca dışarıya açık adresler görülebilir.
+
+Bu klasördeki ajan, ölçümü SUNUCUNUZUN KENDİSİNE yaptırır:
+  - iç ağdaki sunucular da görünür (dosya, posta, yedekleme...)
+  - gerçek LAN ping'i olduğu için değerler 1-5 ms çıkar
+  - IP adresleri dışarı sızmaz, sadece etiket ve süre gider
+
+NASIL DEVREYE GİRER
+-------------------
+Site zaten hazır. assets/status.js içinde mode 'auto' ayarlı:
+  1. Sayfa açılınca önce durum.json aranır.
+  2. Dosya varsa panel gerçek sunucu verisini gösterir.
+  3. Dosya yoksa otomatik olarak tarayıcı ölçümüne düşer.
+
+Yani ajanı kurup durum.json üretmeye başladığınız an site
+kendiliğinden gerçek veriye geçer. Sitede TEK BİR DOSYAYI
+bile değiştirmeniz gerekmez.
+
+HANGİ DOSYA
+-----------
+  durum-ajan.sh    Linux / macOS  (cron ile)
+  durum-ajan.ps1   Windows        (Görev Zamanlayıcı ile)
+
+Her ikisinin de başında kurulum adımları yazılı.
+
+ÜRETİLEN DOSYA BİÇİMİ
+---------------------
+durum.json, sitenin kök dizininde (index.html'in yanında) olmalı:
+
+[
+  {"label":"Dosya sunucusu",   "up":true,  "ms":2},
+  {"label":"Posta sunucusu",   "up":true,  "ms":3},
+  {"label":"Yedekleme ünitesi","up":false, "ms":null}
+]
+
+  label : panelde görünecek ad (IP yazmayın)
+  up    : true = aktif, false = yanıt yok
+  ms    : ortalama yanıt süresi; erişilemiyorsa null
+
+AJAN NEREDE ÇALIŞMALI
+---------------------
+İç ağdaki sunucuları görebilmesi için ajan da o ağın içinde
+olmalı. Site başka bir yerde barınıyorsa ajan durum.json'u
+üretip FTP/SCP ile siteye yükler — script dosyalarının sonunda
+bunun için hazır satırlar var.
+
+GÜVENLİK NOTU
+-------------
+durum.json herkese açık bir dosyadır. İçine IP, hostname,
+sürüm bilgisi veya iç ağ yapısı YAZMAYIN. Sadece insanın
+okuyacağı etiket ve süre yeterlidir.

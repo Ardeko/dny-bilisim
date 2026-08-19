@@ -1237,3 +1237,146 @@ body{overflow-x:clip}
 .megamenu .all{grid-column:span 2;margin-top:6px;padding-top:12px;border-top:1px solid var(--line-soft);
   flex-direction:row;align-items:center;justify-content:space-between;color:var(--accent);font-weight:600}
 .megamenu .all svg{width:14px;height:14px}
+
+/* durum paneli — hizmet odaklı görünüm */
+.status__banner{display:flex;align-items:center;gap:12px;margin:14px 0 4px;padding:12px 14px;
+  border-radius:12px;border:1px solid rgba(79,217,168,.28);
+  background:linear-gradient(180deg,rgba(79,217,168,.14),rgba(79,217,168,.05))}
+.status__banner.is-warn{border-color:rgba(255,194,75,.32);
+  background:linear-gradient(180deg,rgba(255,194,75,.14),rgba(255,194,75,.05))}
+.status__pulse{position:relative;width:10px;height:10px;border-radius:50%;flex:none;background:#4FD9A8}
+.status__banner.is-warn .status__pulse{background:#FFC24B}
+.status__pulse::after{content:'';position:absolute;inset:0;border-radius:50%;background:inherit;
+  animation:stPulse 2.2s ease-out infinite}
+@keyframes stPulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(3.2);opacity:0}}
+.status__banner-txt{min-width:0;line-height:1.35}
+.status__banner-txt b{display:block;font-size:14px;color:#fff;font-weight:600}
+.status__banner-txt small{display:block;font-size:11.5px;color:rgba(255,255,255,.6)}
+.status__row .st{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;color:#7FE3C0;min-width:58px;justify-content:flex-end}
+.status__row .st i{width:6px;height:6px;border-radius:50%;background:#4FD9A8;box-shadow:0 0 7px #4FD9A8;flex:none}
+.status__row .st.is-down{color:#FF9B9B}
+.status__row .st.is-down i{background:#FF7A7A;box-shadow:0 0 7px #FF7A7A}
+.status__row .st.is-wait{color:rgba(255,255,255,.4)}
+.status__row .st.is-wait i{background:rgba(255,255,255,.3);box-shadow:none}
+@media(max-width:400px){.status__row .st span{display:none}.status__row .st{min-width:14px}}
+
+/* =========================================================
+   SIKÇA SORULAN SORULAR
+   ========================================================= */
+.faq{border-top:1px solid var(--line)}
+.faq__item{border-bottom:1px solid var(--line)}
+.faq__q{width:100%;display:flex;align-items:flex-start;gap:18px;background:none;border:0;
+  padding:24px 0;cursor:pointer;text-align:left}
+.faq__no{flex:none;width:34px;font-size:12.5px;font-weight:600;letter-spacing:.1em;
+  color:var(--text-soft);padding-top:4px}
+.faq__t{flex:1;min-width:0;font-size:clamp(16.5px,1.9vw,20px);font-weight:600;color:var(--ink);
+  letter-spacing:-.02em;line-height:1.35;transition:color .25s}
+.faq__q:hover .faq__t{color:var(--accent)}
+.faq__sign{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);
+  display:grid;place-content:center;color:var(--accent);margin-top:-2px;
+  transition:background .3s,border-color .3s,color .3s}
+.faq__sign svg{width:13px;height:13px;transition:transform .4s var(--ease)}
+.faq__q:hover .faq__sign{background:var(--grad);border-color:transparent;color:#fff}
+.faq__item.is-open .faq__sign svg{transform:rotate(45deg)}
+.faq__a{height:0;overflow:hidden;transition:height .42s var(--ease)}
+.faq__a-in{padding:0 0 26px 52px;max-width:74ch}
+.faq__a p{font-size:15.5px;line-height:1.75}
+@media(max-width:640px){
+  .faq__q{gap:12px;padding:20px 0}
+  .faq__no{width:24px;font-size:11.5px}
+  .faq__a-in{padding-left:36px;padding-bottom:22px}
+  .faq__sign{width:30px;height:30px}
+}
+
+
+/* asistan — yazarken canlı öneri */
+.asst__sugg{display:none;flex-direction:column;gap:4px;padding:0 16px 10px}
+.asst__sugg.is-on{display:flex}
+.asst__sugg button{text-align:left;font-size:13px;line-height:1.45;padding:9px 12px;border-radius:10px;
+  border:1px solid var(--line);background:var(--bg-2);color:var(--text);cursor:pointer;
+  transition:border-color .2s,color .2s}
+.asst__sugg button:hover{border-color:var(--accent);color:var(--accent)}
+
+/* asistan — ilgili konular, sihirbaz seçenekleri, acil uyarı */
+.asst__rel{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-self:start;max-width:92%}
+.asst__rel > span{width:100%;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text-soft);margin:2px 0 2px}
+.asst__rel button{font-size:12.5px;line-height:1.4;text-align:left;padding:8px 12px;border-radius:100px;
+  border:1px dashed var(--line);background:transparent;color:var(--text);cursor:pointer;
+  transition:border-color .25s,color .25s,background .25s}
+.asst__rel button:hover{border-style:solid;border-color:var(--accent);color:var(--accent);background:var(--bg-2)}
+.asst__rel.is-wiz button{border-style:solid;background:var(--bg-2)}
+.asst__urgent{display:block;margin-bottom:8px;padding:8px 11px;border-radius:9px;font-size:13px;
+  background:rgba(255,194,75,.14);border:1px solid rgba(255,194,75,.35);color:var(--ink);font-weight:600}
+[data-theme="dark"] .asst__urgent{color:#FFD98A}
+.asst__note{letter-spacing:.01em}
+
+/* harita — onaya bağlı yükleme (üçüncü tarafa veri gitmesin) */
+.map--onay{display:grid;place-items:center;background:var(--bg-2);position:relative;overflow:hidden}
+.map--onay::before{content:'';position:absolute;inset:0;opacity:.5;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:38px 38px;
+  mask-image:radial-gradient(70% 70% at 50% 50%,#000,transparent 80%);
+  -webkit-mask-image:radial-gradient(70% 70% at 50% 50%,#000,transparent 80%)}
+.map__ask{position:relative;z-index:2;display:grid;justify-items:center;gap:10px;
+  text-align:center;padding:26px;max-width:400px}
+.map__ask svg{width:30px;height:30px;color:var(--accent)}
+.map__ask b{font-size:16px;color:var(--ink);font-weight:600}
+.map__ask span{font-size:13px;line-height:1.6;color:var(--text-soft)}
+.map__ask .btn{margin-top:4px}
+.map__ask a{font-size:13px;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.map--yuklendi .map__ask{display:none}
+.map--onay iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* =========================================================
+   YASAL SAYFALAR (gizlilik, çerez)
+   ========================================================= */
+.yasal{display:grid;gap:clamp(28px,4vw,56px)}
+@media(min-width:960px){.yasal{grid-template-columns:minmax(210px,250px) minmax(0,1fr);align-items:start}}
+.yasal__nav{position:sticky;top:100px;border:1px solid var(--line);border-radius:14px;
+  padding:20px;background:var(--bg-2)}
+@media(max-width:959px){.yasal__nav{position:static}}
+.yasal__nav b{display:block;font-size:11.5px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--text-soft);margin-bottom:12px}
+.yasal__nav ul{margin:0;padding:0;list-style:none;display:grid;gap:2px;counter-reset:y}
+.yasal__nav a{display:block;padding:7px 0;font-size:14px;color:var(--text);
+  border-bottom:1px solid var(--line-soft);transition:color .2s,padding-left .25s}
+.yasal__nav li:last-child a{border-bottom:0}
+.yasal__nav a:hover{color:var(--accent);padding-left:5px}
+.yasal__govde{display:grid;gap:clamp(30px,4vw,46px);max-width:74ch}
+.yasal__blok h2{font-size:clamp(20px,2.3vw,26px);margin-bottom:14px;scroll-margin-top:110px}
+.yasal__blok h3{font-size:16px;margin:20px 0 8px}
+.yasal__blok p{font-size:15.5px;line-height:1.75;margin-bottom:12px}
+.yasal__blok ul{margin:0 0 14px;padding-left:20px;display:grid;gap:9px;font-size:15.5px;line-height:1.7}
+.yasal__blok li::marker{color:var(--accent)}
+.yasal__blok a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.doldur{background:rgba(255,194,75,.18);border-bottom:1px dashed rgba(255,194,75,.7);
+  padding:1px 5px;border-radius:3px;color:var(--ink);font-weight:500}
+
+/* tablo */
+.tablo{border:1px solid var(--line);border-radius:14px;overflow-x:auto;background:var(--surface)}
+.tablo table{width:100%;border-collapse:collapse;min-width:640px;font-size:14.5px}
+.tablo th{text-align:left;padding:14px 16px;font-size:11.5px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--text-soft);background:var(--bg-2);
+  border-bottom:1px solid var(--line);white-space:nowrap}
+.tablo td{padding:15px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top;line-height:1.6}
+.tablo tr:last-child td{border-bottom:0}
+.tablo code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:13px;color:var(--accent);
+  background:var(--bg-2);padding:2px 7px;border-radius:5px;white-space:nowrap}
+.etiket{display:inline-block;font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:100px;
+  background:var(--bg-2);border:1px solid var(--line);color:var(--text-soft);white-space:nowrap}
+
+.footer__yasal{display:flex;flex-wrap:wrap;gap:6px 18px}
+.footer__yasal a{font-size:13.5px}
+
+/* yasal sayfalar yalnızca Türkçedir; EN görünümde açıklama çıkar */
+.yasal__en{display:none}
+html[lang="en"] .yasal__en{display:block;max-width:var(--max);margin:0 auto;
+  padding:22px var(--gut);}
+html[lang="en"] .yasal__en > b{display:block;font-size:11.5px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+html[lang="en"] .yasal__en p{font-size:14.5px;line-height:1.7;color:var(--text-soft);max-width:70ch;
+  border-left:3px solid var(--accent);padding-left:16px}
+html[lang="en"] .yasal__en a{color:var(--accent);text-decoration:underline}

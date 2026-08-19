@@ -1,0 +1,41 @@
+!!! BU PAKET SUNUM İÇİNDİR — YAYINA ALMAYIN !!!
+================================================
+
+NE FARKI VAR
+------------
+Yayın paketiyle (dny-bilisim) tek farkı şudur:
+
+  assets/durum-demo.js        <- fazladan bir dosya
+  HTML'lerde bir script satırı <- o dosyayı yükler
+
+Bu script, sistem durumu paneline ÖRNEK sunucu verisi besler:
+Dosya sunucusu, Posta sunucusu, Yedekleme ünitesi, Güvenlik
+duvarı, Müşteri portalı, Web sunucusu — LAN ping bandında
+(1-5 ms) değerlerle, her yenilemede hafifçe değişerek.
+
+Amaç: izleme ajanı kurulduğunda panelin nasıl görüneceğini
+müşteriye gösterebilmek.
+
+Sitenin geri kalanı yayın paketiyle birebir aynıdır.
+
+YAYINA ALIRKEN
+--------------
+İki seçenek:
+  A) dny-bilisim (yayın) paketini yükleyin — en temizi.
+  B) Bu paketi yüklediyseniz assets/durum-demo.js dosyasını
+     silin ve HTML'lerdeki şu satırı kaldırın:
+       <script src="assets/durum-demo.js"></script>
+
+Silindiğinde panel otomatik olarak gerçek ölçüme döner.
+
+SUNUM SIRASINDA
+---------------
+Tarayıcı konsolu açılırsa sarı bir uyarı görünür:
+"SUNUM MODU — sistem durumu panelindeki değerler ÖRNEKTİR."
+Bu bilinçlidir; teknik biri baktığında yanlış anlaşılma olmasın.
+
+ONAY SONRASI
+------------
+Sunucu erişimi geldiğinde ajan/ klasöründeki script'i kurun.
+Panel durum.json'u bulduğu an gerçek verilere geçer; sitede
+başka hiçbir değişiklik gerekmez.

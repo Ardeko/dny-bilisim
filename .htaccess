@@ -1,1 +1,4 @@
 ErrorDocument 404 /404.html
+
+# eski adres yeni adrese kalıcı yönlendirilir
+Redirect 301 /uzak-destek.html /uzaktan-destek.html

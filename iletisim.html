@@ -67,8 +67,9 @@ var r=document.documentElement;r.setAttribute('data-theme-mode',m);r.setAttribut
         </div>
       </span>
       <a href="referanslar.html">Referanslar</a>
-      <a href="uzak-destek.html">Uzak destek</a>
+      <a href="uzaktan-destek.html">Uzaktan destek</a>
       <a href="gerekli-yazilimlar.html">Gerekli yazılımlar</a>
+      <a href="sss.html">SSS</a>
     </nav>
     <div class="header__right">
       <a href="mailto:destek@dny.com.tr" class="header__mail"><span>7/24 destek</span>destek@dny.com.tr</a>
@@ -92,8 +93,9 @@ var r=document.documentElement;r.setAttribute('data-theme-mode',m);r.setAttribut
   <a class="drawer__link" href="hakkimizda.html">Hakkımızda <svg viewBox="0 0 16 16" fill="none"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   <a class="drawer__link" href="hizmetler.html">Hizmetler <svg viewBox="0 0 16 16" fill="none"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   <a class="drawer__link" href="referanslar.html">Referanslar <svg viewBox="0 0 16 16" fill="none"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-  <a class="drawer__link" href="uzak-destek.html">Uzak destek <svg viewBox="0 0 16 16" fill="none"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <a class="drawer__link" href="uzaktan-destek.html">Uzaktan destek <svg viewBox="0 0 16 16" fill="none"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   <a class="drawer__link" href="gerekli-yazilimlar.html">Gerekli yazılımlar <svg viewBox="0 0 16 16" fill="none"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <a class="drawer__link" href="sss.html">Sıkça sorulan sorular <svg viewBox="0 0 16 16" fill="none"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   <a class="drawer__link" href="iletisim.html">İletişim <svg viewBox="0 0 16 16" fill="none"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   <div class="drawer__foot">
     <a href="mailto:destek@dny.com.tr" class="btn btn--grad">7/24 destek: destek@dny.com.tr</a>
@@ -116,7 +118,7 @@ var r=document.documentElement;r.setAttribute('data-theme-mode',m);r.setAttribut
 <main class="fade" id="icerik" tabindex="-1">
 
   <section class="pagehead on-dark" data-rail="İletişim">
-    <canvas class="aurora" data-signal aria-hidden="true"></canvas>
+    <canvas class="aurora" data-bg="flat" data-signal aria-hidden="true"></canvas>
     <div class="wrap pagehead__in" data-parallax>
       <nav class="crumb" aria-label="Sayfa yolu">
         <a href="index.html">Ana sayfa</a><span>/</span><span>İletişim</span>
@@ -164,14 +166,20 @@ var r=document.documentElement;r.setAttribute('data-theme-mode',m);r.setAttribut
               </div>
             </div>
             <div class="info__row">
-              <h4>Uzak destek</h4>
+              <h4>Uzaktan destek</h4>
               <p style="font-size:15.5px;color:var(--text)">Gerekli programlara <a href="gerekli-yazilimlar.html" style="font-size:inherit">gerekli yazılımlar</a> sayfasından ulaşabilirsiniz.</p>
             </div>
           </div>
 
-          <div class="map" style="margin-top:32px">
-            <iframe title="DNY Bilişim ofis konumu" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-              src="https://maps.google.com/maps?q=Binbirdirek%20Mahallesi%20Dostluk%20Yurdu%20Sokak%20No%3A1%20Fatih%20%C4%B0stanbul&z=16&output=embed"></iframe>
+          <div class="map map--onay" style="margin-top:32px" data-map
+            data-src="https://maps.google.com/maps?q=Binbirdirek%20Mahallesi%20Dostluk%20Yurdu%20Sokak%20No%3A1%20Fatih%20%C4%B0stanbul&z=16&output=embed">
+            <div class="map__ask">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+              <b>Haritayı göster</b>
+              <span>Harita Google tarafından sağlanır. Yüklendiğinde IP adresiniz Google'a iletilir. Göstermek için onayınız gerekiyor.</span>
+              <button type="button" class="btn btn--grad">Haritayı yükle</button>
+              <a href="https://www.google.com/maps/search/?api=1&query=Binbirdirek+Mahallesi+Dostluk+Yurdu+Sokak+No:1+Fatih+İstanbul" target="_blank" rel="noopener noreferrer">Yeni sekmede aç</a>
+            </div>
           </div>
         </div>
 
@@ -259,7 +267,8 @@ var r=document.documentElement;r.setAttribute('data-theme-mode',m);r.setAttribut
         <ul>
           <li><a href="hakkimizda.html">Hakkımızda</a></li>
           <li><a href="referanslar.html">Referanslar</a></li>
-          <li><a href="uzak-destek.html">Uzak destek</a></li>
+          <li><a href="uzaktan-destek.html">Uzaktan destek</a></li>
+          <li><a href="sss.html">Sıkça sorulan sorular</a></li>
           <li><a href="gerekli-yazilimlar.html">Gerekli yazılımlar</a></li>
           <li><a href="iletisim.html">İletişim</a></li>
         </ul>
@@ -292,7 +301,7 @@ var r=document.documentElement;r.setAttribute('data-theme-mode',m);r.setAttribut
 
     <div class="footer__bar">
       <span>© <span data-year>2026</span> DNY Bilişim — Tüm hakları saklıdır.</span>
-      <span>Destek 7/24 açıktır.</span>
+      <span class="footer__yasal"><a href="gizlilik.html">Gizlilik ve KVKK</a><a href="cerez.html">Çerezler</a><a href="sss.html">SSS</a></span>
     </div>
   </div>
 </footer>
@@ -305,7 +314,10 @@ var r=document.documentElement;r.setAttribute('data-theme-mode',m);r.setAttribut
 
 <script src="assets/i18n.js"></script>
 <script src="assets/status.js"></script>
+<!-- SUNUM İÇİN ÖRNEK VERİ — yayına alırken bu satırı silin -->
+<script src="assets/durum-demo.js"></script>
 <script src="assets/main.js"></script>
+<script src="assets/shader-bg.js"></script>
 <script src="assets/assistant.js"></script>
 </body>
 </html>

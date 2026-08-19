@@ -28,7 +28,7 @@ window.DNY_I18N = {
     "Hakkımızda": "About",
     "Hizmetler": "Services",
     "Referanslar": "Clients",
-    "Uzak destek": "Remote support",
+    "Uzaktan destek": "Remote support",
     "Gerekli yazılımlar": "Downloads",
     "İletişim": "Contact",
     "Bilişim": "IT Services",
@@ -78,7 +78,7 @@ window.DNY_I18N = {
     "Arıza mesai saati beklemez. Hafta sonu, gece, tatil — destek kanalımız her zaman açık.":
       "Failures do not wait for office hours. Weekends, nights, holidays — our support channel is always open.",
     "Sisteminiz durursa her saat bize ulaşabilirsiniz.": "If your systems stop, you can reach us at any hour.",
-    "Uzak bağlantıyla anında müdahale, gerektiğinde aynı gün yerinde servis.":
+    "Uzaktan bağlantıyla anında müdahale, gerektiğinde aynı gün yerinde servis.":
       "Immediate response over a remote connection, same-day on-site service when needed.",
     "Bilişim ihtiyacınızın tamamı, tek muhatapta": "Every IT need, one point of contact",
     "Donanım tedarikinden ağ kurulumuna, güvenlikten yazılıma kadar tüm süreci aynı ekip yürütür. Sorumluluk dağılmaz.":
@@ -93,7 +93,7 @@ window.DNY_I18N = {
     "Güvenlik duvarı, erişim yetkileri, kamera ve geçiş kontrol sistemleri.":
       "Firewalls, access permissions, camera and access control systems.",
     "Teknik destek": "Technical support",
-    "7/24 açık destek, uzak bağlantıyla anında müdahale, periyodik bakım.":
+    "7/24 açık destek, uzaktan bağlantıyla anında müdahale, periyodik bakım.":
       "Support open 24/7, immediate remote response, scheduled maintenance.",
     "Sekiz hizmetin tamamını görün": "See all eight services",
     "Kuruluş yılı": "Founded",
@@ -116,7 +116,7 @@ window.DNY_I18N = {
     "İzleme": "Monitoring",
     "Sistemler uzaktan izlenir. Yedekler kontrol edilir, güncellemeler planlanır; arıza büyümeden yakalanır.":
       "Systems are monitored remotely. Backups are verified, updates are scheduled, faults are caught early.",
-    "Tek muhatap. Gece ya da hafta sonu fark etmez; uzak bağlantıyla anında, gerektiğinde yerinde müdahale.":
+    "Tek muhatap. Gece ya da hafta sonu fark etmez; uzaktan bağlantıyla anında, gerektiğinde yerinde müdahale.":
       "One point of contact. Night or weekend makes no difference: immediate remote response, on-site when needed.",
     "Yıllardır aynı ekiple çalışan kurumlar": "Companies that have stayed with the same team for years",
     "Referans listesinin tamamı": "See the full client list",
@@ -216,9 +216,9 @@ window.DNY_I18N = {
 
     "Teknik destek ve bakım": "Technical support and maintenance",
     "7/24 açık destek, uzak ya da yerinde.": "Support open 24/7, remote or on site.",
-    "Destek kanalımız her saat açık. Çoğu sorun uzak bağlantıyla dakikalar içinde çözülür; donanım gerektiren durumlarda İstanbul içinde aynı gün yerinde servis veriyoruz.":
+    "Destek kanalımız her saat açık. Çoğu sorun uzaktan bağlantıyla dakikalar içinde çözülür; donanım gerektiren durumlarda İstanbul içinde aynı gün yerinde servis veriyoruz.":
       "Our support channel is open at every hour. Most problems are solved within minutes over a remote connection; where hardware is involved we provide same-day on-site service within Istanbul.",
-    "7/24 uzak bağlantı desteği": "24/7 remote connection support",
+    "7/24 uzaktan bağlantı desteği": "24/7 remote connection support",
     "İstanbul içi aynı gün yerinde servis": "Same-day on-site service within Istanbul",
     "Periyodik bakım ve kontrol takvimi": "Scheduled maintenance and inspection calendar",
     "Kullanıcı eğitimi ve kurulum yönlendirmesi": "User training and setup guidance",
@@ -316,17 +316,17 @@ window.DNY_I18N = {
     "Mevcut altyapınızı ücretsiz değerlendiriyor, ihtiyaç varsa yol haritası çıkarıyoruz.":
       "We assess your existing infrastructure free of charge and draw up a roadmap if one is needed.",
 
-    /* ---------- uzak destek ---------- */
-    "Uzak destek — DNY Bilişim | 7/24 teknik destek":
+    /* ---------- uzaktan destek ---------- */
+    "Uzaktan destek — DNY Bilişim | 7/24 teknik destek":
       "Remote support — DNY Bilişim | 24/7 technical support",
-    "Uzak bağlantıyla teknik destek: nasıl işler, hangi durumlarda kullanılır, güvenliği nasıl sağlanır. 7/24 destek: destek@dny.com.tr.":
+    "Uzaktan bağlantıyla teknik destek: nasıl işler, hangi durumlarda kullanılır, güvenliği nasıl sağlanır. 7/24 destek: destek@dny.com.tr.":
       "Technical support over a remote connection: how it works, when it is used and how it is kept secure. 24/7 support: destek@dny.com.tr.",
     "Bilgisayarınıza uzaktan bağlanalım": "Let us connect to your computer remotely",
-    "Sorunların büyük kısmı yerinde servise gerek kalmadan, birkaç dakikada uzak bağlantıyla çözülüyor.":
+    "Sorunların büyük kısmı yerinde servise gerek kalmadan, birkaç dakikada uzaktan bağlantıyla çözülüyor.":
       "Most problems are solved in a few minutes over a remote connection, with no on-site visit needed.",
     "Nasıl işliyor": "How it works",
     "Üç adımda bağlantı": "Connecting in three steps",
-    "Önce bize yazın. Uzak bağlantı, ancak siz onay verdikten sonra ve siz ekranı görürken kurulur.":
+    "Önce bize yazın. Uzaktan bağlantı, ancak siz onay verdikten sonra ve siz ekranı görürken kurulur.":
       "Write to us first. The remote connection is only established after you approve it, and while you are watching the screen.",
     "Destek talebi açın": "Open a support request",
     "destek@dny.com.tr adresine sorunu kısaca yazın. Destek kanalımız 7/24 açıktır; mesai saati beklemenize gerek yok.":
@@ -340,7 +340,7 @@ window.DNY_I18N = {
     "Gerekli yazılımları indirin": "Go to downloads",
     "Seçenekler": "Options",
     "Her sorunun kendi yolu var": "Every problem has its own route",
-    "Uzak bağlantı": "Remote connection",
+    "Uzaktan bağlantı": "Remote connection",
     "Yazılım ayarları, güncelleme, e-posta ve yazıcı sorunları gibi işlerin çoğu birkaç dakikada uzaktan çözülür.":
       "Software settings, updates, email and printer problems are usually solved remotely within minutes.",
     "Sunucu erişimi": "Server access",
@@ -361,7 +361,7 @@ window.DNY_I18N = {
     "Programı kapatmanız bağlantıyı anında sonlandırır. Kalıcı bir erişim izni bırakılmaz.":
       "Closing the program ends the connection immediately. No permanent access is left behind.",
     "Dikkat:": "Please note:",
-    "Uzak destek programını yalnızca bu site üzerinden veya destek@dny.com.tr adresinden gelen yönlendirmeyle indirin. Kendini DNY Bilişim olarak tanıtan, aramadığınız hâlde size ulaşan kişilere bağlantı izni vermeyin.":
+    "Uzaktan destek programını yalnızca bu site üzerinden veya destek@dny.com.tr adresinden gelen yönlendirmeyle indirin. Kendini DNY Bilişim olarak tanıtan, aramadığınız hâlde size ulaşan kişilere bağlantı izni vermeyin.":
       "Only download remote support software through this site or a link sent from destek@dny.com.tr. Never grant access to anyone who contacts you unprompted claiming to be from DNY Bilişim.",
     "Şu an bir sorun mu yaşıyorsunuz?": "Having a problem right now?",
     "Destek kanalımız 7/24 açık. Yazın, bağlanalım.":
@@ -370,9 +370,9 @@ window.DNY_I18N = {
     /* ---------- gerekli yazılımlar ---------- */
     "Gerekli yazılımlar — DNY Bilişim | TeamViewer QuickSupport ve Host":
       "Downloads — DNY Bilişim | TeamViewer QuickSupport and Host",
-    "Uzak destek için TeamViewer QuickSupport ve TeamViewer Host indirme bağlantıları. Windows ve macOS için, kurulum adımlarıyla birlikte.":
+    "Uzaktan destek için TeamViewer QuickSupport ve TeamViewer Host indirme bağlantıları. Windows ve macOS için, kurulum adımlarıyla birlikte.":
       "TeamViewer QuickSupport and TeamViewer Host download links for remote support. For Windows and macOS, with installation steps.",
-    "Uzak destek için gereken programlar": "The programs you need for remote support",
+    "Uzaktan destek için gereken programlar": "The programs you need for remote support",
     "Destek talebiniz sonrasında aşağıdaki programlardan size uygun olanı indirip çalıştırmanız yeterli.":
       "After you open a support request, simply download and run whichever of the programs below applies to you.",
     "İndirmeler": "Downloads",
@@ -411,7 +411,7 @@ window.DNY_I18N = {
     "Ekranınızda çıkan bağlantı isteğini onaylayın. İşlem boyunca ekranı görürsünüz; bitince programı kapatın.":
       "Approve the connection request that appears on your screen. You watch the whole session; close the program when it is finished.",
     "Güvenlik uyarısı:": "Security warning:",
-    "Uzak destek programlarını yalnızca bu sayfadan indirin. Sizi arayıp uzak bağlantı isteyen, kendini kurum ya da banka çalışanı olarak tanıtan kişilere kimlik ve şifre bilgisi vermeyin.":
+    "Uzaktan destek programlarını yalnızca bu sayfadan indirin. Sizi arayıp uzaktan bağlantı isteyen, kendini kurum ya da banka çalışanı olarak tanıtan kişilere kimlik ve şifre bilgisi vermeyin.":
       "Only download remote support software from this page. Never give your ID and password to anyone who calls you asking for a remote connection while claiming to work for a company or a bank.",
     "Hangi programı kuracağınızdan emin değil misiniz?": "Not sure which program to install?",
     "Yazın, işletim sisteminize ve ihtiyacınıza uygun olanı birlikte belirleyelim.":
@@ -580,7 +580,7 @@ window.DNY_I18N = {
     "Kullanıcıların günlük çalıştığı bilgisayarlar. Standart kurulum imajı sayesinde yeni cihaz saatler değil dakikalar içinde hazır olur.":
       "The computers people work on every day. With a standard installation image a new machine is ready in minutes, not hours.",
     "Standart kurulum ve yazılım paketi": "Standard installation and software package",
-    "Uzak destek istemcisi": "Remote support client",
+    "Uzaktan destek istemcisi": "Remote support client",
     "Arızada aynı gün yerinde müdahale": "Same-day on-site response for failures",
     "Kablosuz ağ": "Wireless network",
     "Kapsama ölçülerek planlanır. Misafir ağı kurum ağından ayrılır; ikisi birbirini görmez.":
@@ -625,20 +625,23 @@ window.DNY_I18N = {
     "İstenen adrese ulaşılamıyor.": "The requested address cannot be reached.",
     "404 — kaynak bulunamadı": "404 — resource not found",
     "Sistem durumu": "System status",
-    "ortalama": "average",
-    "en iyi": "best",
     "canlı": "live",
     "Web sunucusu": "Web server",
-    "Statik dosyalar": "Static files",
-    "Sunucu yanıt süresi": "Server response time",
-    "Sayfa indirme": "Page download",
-    "Stil dosyası": "Stylesheet",
+    "İçerik teslimi": "Content delivery",
+    "Statik dosya sunucusu": "Static file server",
     "Görsel sunucusu": "Image server",
+    "Tüm sistemler çalışıyor": "All systems operational",
+    "Bazı servislerde sorun var": "Some services are degraded",
+    "hizmet aktif": "services up",
+    "son kontrol": "last check",
+    "aktif": "up",
+    "yanıt yok": "no response",
+    "ölçülüyor": "checking",
+    "ortalama yanıt": "average",
+    "en hızlı": "fastest",
     "Posta sunucusu": "Mail server",
     "Müşteri portalı": "Client portal",
     "7/24 destek — bize yazın": "24/7 support — write to us",
-    "Ölçüm tarayıcınızdan yapılır, bu yüzden kendi bağlantı hızınızı da içerir.":
-      "Measured from your own browser, so it includes your own connection speed.",
     "Veriler UptimeRobot izleme hesabımızdan alınır.":
       "Data comes from our UptimeRobot monitoring account.",
     "Veriler izleme sunucumuzdan alınır.": "Data comes from our monitoring server.",
@@ -653,7 +656,7 @@ window.DNY_I18N = {
     "kamera sistemleri": "camera systems",
     "geçiş kontrol": "access control",
     "7/24 teknik destek": "24/7 technical support",
-    "uzak bağlantı": "remote connection",
+    "uzaktan bağlantı": "remote connection",
     "yerinde servis": "on-site service",
     "web tasarım": "web design",
     "e-ticaret": "e-commerce",
@@ -663,23 +666,371 @@ window.DNY_I18N = {
     "yedekleme": "backup",
     "felaket kurtarma": "disaster recovery",
 
+    /* ---------- durum paneli notu ---------- */
+    "Yanıt süreleri her": "Response times refresh every",
+    "yanıt süreleri her": "response times refresh every",
+    "saniyede yenilenir": "seconds",
+    "İzleme kaydı": "Monitoring records",
+    "İzleme ajanı": "Monitoring agent",
+    "İzleme sunucusu": "Monitoring server",
+    "Yanıt süreleri her 25 saniyede yenilenir.": "Response times refresh every 25 seconds.",
+
+    /* ---------- yasal ---------- */
+    "Gizlilik ve KVKK": "Privacy and KVKK",
+    "Çerezler": "Cookies",
+    "Gizlilik": "Privacy",
+    "Haritayı göster": "Show the map",
+    "Haritayı yükle": "Load the map",
+    "Yeni sekmede aç": "Open in a new tab",
+    "Harita Google tarafından sağlanır. Yüklendiğinde IP adresiniz Google'a iletilir. Göstermek için onayınız gerekiyor.":
+      "The map is provided by Google. Loading it sends your IP address to Google, so we ask for your consent first.",
+
+    /* ---------- SSS ve son eklemeler ---------- */
+    "\"Otuz yıldır aynı işi yapıyoruz: kurumların durmamasını sağlamak.\"":
+      "\"For thirty years we have done one thing: keeping companies from stopping.\"",
+    "12 soru":
+      "12 questions",
+    "Ücretsiz keşif":
+      "Free survey",
+    "SSS":
+      "FAQ",
+    "Sorular":
+      "Questions",
+    "Cevaplar":
+      "Answers",
+    "Sıkça sorulan sorular":
+      "Frequently asked questions",
+    "Sıkça sorulan sorular — DNY Bilişim":
+      "Frequently asked questions — DNY Bilişim",
+    "Merak edilenler, açık açık":
+      "Straight answers to common questions",
+    "Sorunuza dokunun, açılsın":
+      "Tap a question to open it",
+    "Sorunuz listede yok mu?":
+      "Question not on the list?",
+    "Kendi durumunuzu konuşalım":
+      "Let's talk about your situation",
+    "Destek 7/24 açıktır.":
+      "Support is open 24/7.",
+    "hizmet aktif ·":
+      "services up ·",
+    "— Ekrem Şeneş, Kurucu":
+      "— Ekrem Şeneş, Founder",
+    "Fiyatlandırma, sözleşme, müdahale süresi, uzaktan destek güvenliği, veri sahipliği ve bakım kapsamı hakkında en sık sorulan soruların yanıtları.":
+      "Answers to the questions we are asked most: pricing, contracts, response times, remote-support security, data ownership and maintenance scope.",
+    "Fiyattan sözleşmeye, uzaktan bağlantı güvenliğinden veri sahipliğine kadar bize en çok sorulan sorular. Cevabı burada bulamazsanız yazın, ekleyelim.":
+      "From pricing and contracts to remote-connection security and data ownership — the questions we are asked most. If your answer is not here, write to us and we will add it.",
+    "Aradığınızı bulamazsanız sağ alttaki asistana yazabilir ya da doğrudan bize e-posta gönderebilirsiniz.":
+      "If you cannot find what you need, use the assistant at the bottom right or email us directly.",
+    "destek@dny.com.tr adresine yazın. Sık gelen soruları bu sayfaya ekliyoruz.":
+      "Write to destek@dny.com.tr. We add frequently asked questions to this page.",
+    "Genel cevaplar yeterli olmuyorsa keşif ziyareti için bize yazın; altyapınızı ücretsiz değerlendirelim.":
+      "If general answers are not enough, write to us for a survey visit; we will assess your infrastructure free of charge.",
+    "Aradığınız sayfa bulunamadı. DNY Bilişim ana sayfasına dönebilir veya destek@dny.com.tr adresinden bize ulaşabilirsiniz.":
+      "The page you are looking for was not found. Return to the DNY Bilişim home page or contact us at destek@dny.com.tr.",
+    "DNY Bilişim Donanım ve Danışmanlık Hizmetleri. 1996 yılında Ekrem Şeneş tarafından kurulan firmamız, İstanbul'da kurumsal bilişim altyapısı, güvenlik ve destek çözümleri sunmaktadır.":
+      "DNY Bilişim Hardware and Consultancy Services. Founded in 1996 by Ekrem Şeneş, we provide corporate IT infrastructure, security and support solutions in Istanbul.",
+    "Döler Sigorta, Melis Ecza Deposu, Master Service, AR-VA, Jingle House, Five O'Clock, Sarteks ve daha fazlası: DNY Bilişim referansları.":
+      "Döler Sigorta, Melis Ecza Deposu, Master Service, AR-VA, Jingle House, Five O'Clock, Sarteks and more: DNY Bilişim clients.",
+    "Fiyatlarınız nasıl belirleniyor?":
+      "How do you determine your prices?",
+    "Keşif ziyareti ücretli mi?":
+      "Is the survey visit chargeable?",
+    "Sözleşme yapmak zorunda mıyım?":
+      "Do I have to sign a contract?",
+    "Arızada ne kadar sürede müdahale ediyorsunuz?":
+      "How quickly do you respond to a fault?",
+    "Destek gerçekten 7/24 mü?":
+      "Is support really 24/7?",
+    "Uzaktan bağlantı güvenli mi? Siz istediğiniz zaman girebiliyor musunuz?":
+      "Is the remote connection secure? Can you connect whenever you want?",
+    "Belirli bir markayla mı çalışıyorsunuz?":
+      "Do you work with a specific brand?",
+    "Alan adı ve hosting kimin üzerine kayıtlı olur?":
+      "Who owns the domain and hosting records?",
+    "Yedeklerimizin gerçekten çalıştığını nasıl biliyoruz?":
+      "How do we know our backups actually work?",
+    "Kaç kişilik kurumlarla çalışıyorsunuz?":
+      "What size companies do you work with?",
+    "Mevcut sistemimizi başka bir firma kurdu, devralır mısınız?":
+      "Another company set up our system — will you take it over?",
+    "Web sitesi ve bilişim altyapısını aynı firmadan almanın avantajı ne?":
+      "What is the advantage of getting the website and IT from the same firm?",
+    "Hazır bir fiyat listemiz yok, çünkü aynı iş iki kurumda farklı maliyete çıkıyor. Önce ücretsiz keşif yapıyoruz: mevcut donanım, ağ ve yazılım envanterini çıkarıp neyin gerçekten gerektiğini raporluyoruz. Teklif bu rapora dayanıyor, yani kalem kalem ne için ödeme yaptığınızı görüyorsunuz.":
+      "We do not publish a price list, because the same job costs differently at two companies. First we run a free survey: we take an inventory of the existing hardware, network and software and report what is genuinely needed. The quote is based on that report, so you can see item by item what you are paying for.",
+    "Hayır. İstanbul içinde keşif ziyareti ve ilk değerlendirme ücretsizdir. Keşif sonunda çıkardığımız envanter ve risk raporu sizde kalır — bizimle çalışmasanız bile.":
+      "No. Within Istanbul the survey visit and first assessment are free. The inventory and risk report we produce stays with you — even if you decide not to work with us.",
+    "Zorunlu değil. Tek seferlik kurulum ve arıza müdahalesi için sözleşmesiz de çalışıyoruz. Periyodik bakım ve 7/24 öncelikli destek isteyen kurumlar için aylık bakım anlaşması yapıyoruz; bu durumda müdahale süresi ve kapsam yazılı olarak belirleniyor.":
+      "Not necessarily. We take on one-off installations and fault call-outs without a contract. For companies that want scheduled maintenance and priority 24/7 support we sign a monthly maintenance agreement, which puts response times and scope in writing.",
+    "Uzaktan bağlantı gerektiren işlerde müdahale genellikle dakikalar içinde başlıyor. Donanım değişimi ya da yerinde iş gerektiren durumlarda İstanbul içinde aynı gün yerinde oluyoruz. Bakım anlaşması olan kurumlar sırada öncelikli.":
+      "For anything solvable over a remote connection we usually start within minutes. Where hardware replacement or on-site work is needed we are there the same day within Istanbul. Companies with a maintenance agreement take priority in the queue.",
+    "Evet. Ofisimiz hafta içi 09:00–18:00 açık, ancak destek kanalı gece, hafta sonu ve resmî tatiller dahil her saat açık. Sunucusu gece duran bir kurumun sabahı beklemesi anlamsız.":
+      "Yes. Our office is open weekdays 09:00–18:00, but the support channel is open at every hour, including nights, weekends and public holidays. It makes no sense for a company whose server dies at night to wait until morning.",
+    "Hayır, giremiyoruz. QuickSupport programı yalnızca siz çalıştırdığınızda çalışır ve ekranda çıkan kimlik ile şifreyi bize vermeden bağlantı kurulamaz. Bağlantı boyunca yapılan her işlemi kendi ekranınızda görürsünüz, programı kapatmanız bağlantıyı anında keser. Sunucular için kalıcı erişim (Host) kurulacaksa bu ayrıca konuşulur ve sizin onayınızla yapılır.":
+      "No, we cannot. The QuickSupport program only runs when you start it, and no connection can be made until you give us the ID and password shown on your screen. You watch everything that happens on your own screen, and closing the program cuts the connection instantly. If permanent access (Host) is to be installed on a server, that is discussed separately and set up with your approval.",
+    "Hayır, marka bağımsız çalışıyoruz. Belirli bir üreticinin bayisi değiliz, dolayısıyla size satmak zorunda olduğumuz bir ürün yok. Öneri bütçenize ve ihtiyacınıza göre çıkar.":
+      "No, we are brand independent. We are not a reseller for any manufacturer, so there is no product we are obliged to sell you. Recommendations follow your budget and your needs.",
+    "Her zaman kurumunuzun üzerine. Yönetimini biz üstleniyoruz ama sahiplik ve erişim bilgileri sizde kalır. Yarın başka bir firmayla çalışmaya karar verseniz hiçbir şeyi rehin almıyoruz.":
+      "Always your company. We take on the management, but ownership and access credentials stay with you. If you decide to work with another firm tomorrow, we hold nothing hostage.",
+    "Yedeğin alınmış olması tek başına bir şey ifade etmiyor; asıl soru geri dönüp dönmediği. Bu yüzden düzenli aralıklarla geri dönüş (restore) testi yapıyor ve sonucunu raporluyoruz. Bir kopya da bina dışında tutuluyor — yangın, hırsızlık veya fidye yazılımı ihtimaline karşı.":
+      "Having a backup means nothing on its own; the real question is whether it restores. That is why we run restore tests at regular intervals and report the result. One copy is also kept off site — against fire, theft or ransomware.",
+    "5 kişilik bir muhasebe bürosundan çok lokasyonlu üretim tesisine kadar çalışıyoruz. Ölçek değişiyor ama yaklaşım aynı: önce keşif, sonra tek bir plan.":
+      "From a five-person accountancy office to a multi-site manufacturing plant. The scale changes but the approach does not: survey first, then a single plan.",
+    "Evet, sık yaptığımız bir iş. Devralmadan önce mevcut yapıyı belgeliyoruz: hangi cihaz nerede, şifreler kimde, yedek nereye gidiyor. Bu envanter çıkmadan sorumluluk almıyoruz, çünkü bilinmeyen bir sistemin garantisi verilemez.":
+      "Yes, we do this often. Before taking over we document the existing setup: which device is where, who holds the passwords, where the backups go. We do not accept responsibility until that inventory exists, because you cannot guarantee a system you do not know.",
+    "Sorun çıktığında kimin işi olduğu tartışılmıyor. Site açılmıyorsa hosting mi, DNS mi, ofisteki ağ mı — hepsine aynı ekip bakıyor. Tek numara, tek muhatap.":
+      "When something breaks, nobody argues about whose job it is. If the site will not open, is it hosting, DNS or the office network? The same team looks at all of them. One number, one point of contact.",
+
+    /* ---------- yasal sayfalar ---------- */
+    "Gizlilik ve KVKK — DNY Bilişim":
+      "Privacy and Data Protection — DNY Bilişim",
+    "DNY Bilişim gizlilik politikası ve KVKK aydınlatma metni: hangi veriler işleniyor, hangi amaçla, ne kadar süreyle saklanıyor ve veri sahibi olarak haklarınız neler.":
+      "DNY Bilişim privacy policy and KVKK disclosure notice: which data we process, for what purpose, how long we keep it, and what your rights are as a data subject.",
+    "Gizlilik ve kişisel verilerin korunması":
+      "Privacy and protection of personal data",
+    "Bu sitede ziyaretçi takibi yapılmaz, reklam ağı kullanılmaz, analitik yazılım çalıştırılmaz. Aşağıda hangi verileri neden işlediğimizi ve haklarınızı açıkladık.":
+      "This site does not track visitors, use advertising networks or run analytics software. Below we explain which data we process, why, and what your rights are.",
+    "Takip yok":
+      "No tracking",
+    "Reklam yok":
+      "No advertising",
+    "KVKK m.11 hakları":
+      "Your rights under KVKK art.11",
+    "İçindekiler":
+      "Contents",
+    "Veri sorumlusu":
+      "Data controller",
+    "Bu web sitesi":
+      "This website is operated by",
+    "DNY Bilişim Donanım ve Danışmanlık Hizmetleri":
+      "DNY Bilişim Donanım ve Danışmanlık Hizmetleri",
+    "tarafından işletilmektedir. 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında veri sorumlusu sıfatını taşıyan kuruluşun bilgileri aşağıdadır.":
+      ". Details of the organisation acting as data controller under Turkish Personal Data Protection Law No. 6698 (KVKK) are given below.",
+    "Unvan:":
+      "Legal name:",
+    "DNY Bilişim Teknolojileri Sanayi ve Ticaret Limited Şirketi":
+      "DNY Bilişim Teknolojileri Sanayi ve Ticaret Limited Şirketi",
+    "Adres:":
+      "Address:",
+    "Binbirdirek Mahallesi, Dostluk Yurdu Sokak No:1/9 Yeşil Apt., 34122 Sultanahmet / Fatih — İstanbul":
+      "Binbirdirek Mahallesi, Dostluk Yurdu Sokak No:1/9 Yeşil Apt., 34122 Sultanahmet / Fatih — Istanbul, Türkiye",
+    "E-posta:":
+      "Email:",
+    "Hangi verileri işliyoruz":
+      "What data we process",
+    "Bu sitede ziyaretçi takibi yapılmaz, reklam ağı kullanılmaz, analitik yazılım çalıştırılmaz. İşlenen veriler yalnızca sizin bize doğrudan ilettiklerinizle sınırlıdır.":
+      "This site does not track visitors, use advertising networks or run analytics software. The only data processed is what you send us directly.",
+    "İletişim formu":
+      "Contact form",
+    "Formu doldurup gönderdiğinizde şu alanlar toplanır: ad soyad, kurum adı, e-posta adresi, telefon numarası, talep konusu ve mesajınız. Form sunucumuzda işlem görmez; bilgiler e-posta uygulamanızda hazırlanır ve gönderdiğinizde doğrudan":
+      "When you complete and send the form, the following fields are collected: full name, company name, email address, telephone number, subject and your message. The form is not processed on our server; the details are prepared in your own email application and, once you send them, go directly to",
+    "adresine ulaşır.":
+      ".",
+    "Doğrudan e-posta veya destek talebi":
+      "Direct email or support request",
+    "Bize yazdığınızda paylaştığınız iletişim bilgileri ve talebin içeriği işlenir.":
+      "When you write to us, the contact details you share and the content of your request are processed.",
+    "Sunucu kayıtları":
+      "Server logs",
+    "Barındırma sağlayıcımız, tüm web sunucularında olduğu gibi teknik erişim kayıtları (IP adresi, tarih, istenen sayfa, tarayıcı bilgisi) tutabilir. Bu kayıtlar güvenlik ve arıza tespiti amacıyla saklanır, pazarlama amacıyla kullanılmaz.":
+      "As on any web server, our hosting provider may keep technical access logs (IP address, date, requested page, browser information). These logs are kept for security and fault diagnosis and are never used for marketing.",
+    "İşleme amacı ve hukuki sebep":
+      "Purpose and legal basis",
+    "Talebinize yanıt vermek, teklif hazırlamak:":
+      "Responding to your request and preparing a quote:",
+    "sözleşmenin kurulması veya ifasıyla doğrudan ilgili olması (KVKK m.5/2-c) ve meşru menfaat (KVKK m.5/2-f)":
+      "directly related to the conclusion or performance of a contract (KVKK art.5/2-c) and legitimate interest (KVKK art.5/2-f)",
+    "Teknik destek sürecini yürütmek:":
+      "Carrying out the technical support process:",
+    "sözleşmenin ifası":
+      "performance of a contract",
+    "Sunucu güvenliğini sağlamak:":
+      "Maintaining server security:",
+    "meşru menfaat":
+      "legitimate interest",
+    "Yasal saklama yükümlülükleri:":
+      "Statutory retention obligations:",
+    "hukuki yükümlülüğün yerine getirilmesi (KVKK m.5/2-ç)":
+      "compliance with a legal obligation (KVKK art.5/2-ç)",
+    "Verilerin aktarımı":
+      "Transfer of data",
+    "Kişisel verileriniz pazarlama amacıyla üçüncü kişilere":
+      "Your personal data is never",
+    "satılmaz, kiralanmaz, devredilmez":
+      "sold, rented or transferred",
+    ". Aşağıdaki sınırlı durumlarda aktarım söz konusu olabilir:":
+      " to third parties for marketing purposes. Transfers may occur only in the following limited cases:",
+    "Yetkili kamu kurumları:":
+      "Authorised public authorities:",
+    "yasal talep hâlinde":
+      "upon lawful request",
+    "Site üzerinde yalnızca yazı tipleri Google Fonts üzerinden yüklenmektedir; bu sırada IP adresiniz Google'a iletilir. Harita hizmeti ise":
+      "On this site only the typefaces are loaded from Google Fonts, during which your IP address is sent to Google. The map service, however,",
+    "siz onay vermeden yüklenmez":
+      "is not loaded until you give consent",
+    "— iletişim sayfasındaki haritayı görüntülemeyi seçmediğiniz sürece Google'a herhangi bir istek gönderilmez.":
+      " — unless you choose to display the map on the contact page, no request is sent to Google at all.",
+    "Saklama süresi":
+      "Retention period",
+    "İletişim ve teklif yazışmaları: talebin sonuçlanmasından itibaren":
+      "Contact and quote correspondence: from the conclusion of the request,",
+    "2 yıl":
+      "2 years",
+    "Müşteri ilişkisine dönüşen kayıtlar: ilişkinin sona ermesinden itibaren":
+      "Records that become a client relationship: from the end of the relationship,",
+    "10 yıl":
+      "10 years",
+    "(Türk Ticaret Kanunu ve Vergi Usul Kanunu saklama süreleri)":
+      "(retention periods under the Turkish Commercial Code and Tax Procedure Law)",
+    "Süre dolduğunda kayıtlar silinir, yok edilir veya anonim hâle getirilir.":
+      "Once the period expires, records are deleted, destroyed or anonymised.",
+    "Haklarınız":
+      "Your rights",
+    "KVKK madde 11 uyarınca veri sahibi olarak şu haklara sahipsiniz:":
+      "Under article 11 of the KVKK you have the following rights as a data subject:",
+    "Kişisel verinizin işlenip işlenmediğini öğrenme ve işlenmişse bilgi talep etme":
+      "To learn whether your personal data is processed and, if so, to request information about it",
+    "İşlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme":
+      "To learn the purpose of processing and whether the data is used accordingly",
+    "Yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme":
+      "To know the third parties to whom the data is transferred, in Türkiye or abroad",
+    "Eksik veya yanlış işlenmişse düzeltilmesini isteme":
+      "To request correction if the data is incomplete or inaccurate",
+    "Şartları oluştuğunda silinmesini veya yok edilmesini isteme":
+      "To request deletion or destruction where the conditions are met",
+    "Düzeltme, silme ve yok etme işlemlerinin aktarıldığı üçüncü kişilere bildirilmesini isteme":
+      "To request that correction, deletion and destruction be notified to third parties to whom the data was transferred",
+    "Otomatik sistemlerle analiz sonucu aleyhinize bir sonuç doğmasına itiraz etme":
+      "To object to an adverse outcome arising from analysis carried out solely by automated systems",
+    "Kanuna aykırı işleme sebebiyle zarara uğramanız hâlinde zararın giderilmesini talep etme":
+      "To claim compensation if you suffer damage due to unlawful processing",
+    "Başvurunuzu":
+      "You may submit your request by email to",
+    "adresine e-posta ile veya yukarıdaki adrese yazılı olarak iletebilirsiniz. Talepler en geç":
+      " or in writing to the address above. Requests are answered within",
+    "30 gün":
+      "30 days",
+    "içinde sonuçlandırılır.":
+      "at the latest.",
+    "İletilen bilgiler, işi bilişim güvenliği olan bir ekip tarafından korunur: erişim yetkileri sınırlıdır, kayıtlar yedeklenir ve yedeklerin geri dönüşü düzenli olarak test edilir. Site HTTPS üzerinden sunulur.":
+      "The information you send is protected by a team whose profession is IT security: access rights are restricted, records are backed up, and restoration of those backups is tested regularly. The site is served over HTTPS.",
+    "Değişiklikler":
+      "Changes",
+    "Bu metin gerektiğinde güncellenir. Güncel sürüm her zaman bu sayfada yayımlanır.":
+      "This notice is updated when necessary. The current version is always published on this page.",
+    "Son güncelleme:":
+      "Last updated:",
+    "Eylül 2026":
+      "September 2026",
+    "Sorunuz mu var?":
+      "Do you have a question?",
+    "Kişisel verilerinizle ilgili her talebinizi doğrudan bize iletebilirsiniz.":
+      "You can send any request concerning your personal data directly to us.",
+    "İletişim sayfası":
+      "Contact page",
+    "Çerez ve depolama politikası — DNY Bilişim":
+      "Cookie and storage policy — DNY Bilişim",
+    "DNY Bilişim web sitesinde çerez kullanılmaz. Yalnızca tema, dil ve asistan tercihleri için tarayıcı depolaması kullanılır; bu veriler cihazınızdan çıkmaz.":
+      "The DNY Bilişim website uses no cookies. Browser storage is used only for theme, language and assistant preferences, and that data never leaves your device.",
+    "Bu sitede çerez kullanılmıyor":
+      "This site uses no cookies",
+    "Takip çerezi, reklam pikseli, analitik yazılım — hiçbiri yok. Yalnızca tercihlerinizi hatırlamak için tarayıcınızın kendi depolama alanı kullanılıyor ve bu veriler cihazınızdan hiç çıkmıyor.":
+      "No tracking cookies, no advertising pixels, no analytics software. Your browser's own storage is used solely to remember your preferences, and that data never leaves your device.",
+    "0 çerez":
+      "0 cookies",
+    "0 takip":
+      "0 trackers",
+    "Veri cihazınızda kalır":
+      "Data stays on your device",
+    "Açıklama":
+      "Explanation",
+    "Depolama":
+      "Storage",
+    "Peki ne saklanıyor?":
+      "So what is stored?",
+    "Aşağıdaki beş kayıt tarayıcınızda tutulur. Hiçbiri sunucumuza gönderilmez, hiçbiri kimliğinizi tanımlamaz.":
+      "The five records below are kept in your browser. None is sent to our server and none identifies you.",
+    "Kayıt":
+      "Record",
+    "Tür":
+      "Type",
+    "Amaç":
+      "Purpose",
+    "Süre":
+      "Duration",
+    "Kategori":
+      "Category",
+    "Yerel depolama (localStorage)":
+      "Local storage (localStorage)",
+    "Oturum depolaması (sessionStorage)":
+      "Session storage (sessionStorage)",
+    "Seçtiğiniz tema (sistem / açık / koyu)":
+      "The theme you chose (system / light / dark)",
+    "Seçtiğiniz site dili (Türkçe / İngilizce)":
+      "The site language you chose (Turkish / English)",
+    "Asistanla yazışmanız, sayfalar arasında kaybolmasın diye":
+      "Your conversation with the assistant, so it is not lost between pages",
+    "Asistanın yanıtlayamadığı sorular; hizmeti geliştirmek için yalnızca sizin cihazınızda tutulur":
+      "Questions the assistant could not answer; kept only on your own device to improve the service",
+    "Haritayı yüklemeye onay verdiğinizi hatırlar":
+      "Remembers that you consented to loading the map",
+    "Siz silene kadar":
+      "Until you delete it",
+    "Sekmeyi kapatınca silinir":
+      "Deleted when the tab is closed",
+    "Son 60 kayıt":
+      "Last 60 entries",
+    "İşlevsel":
+      "Functional",
+    "Neden onay istemiyoruz?":
+      "Why we do not ask for consent",
+    "Mevzuat, yalnızca hizmetin çalışması için zorunlu olan depolama için açık rıza aranmamasına izin verir. Yukarıdakilerin tamamı bu kapsamdadır: tema ve dil tercihiniz olmadan site çalışır ama sizi tanımaz, her sayfada baştan seçim yapmanız gerekir. Takip amaçlı hiçbir kayıt tutulmadığı için ekranınızı kapatan bir onay kutusuna da gerek yok.":
+      "The legislation allows storage that is strictly necessary for the service to work to be exempt from explicit consent. Everything above falls into that category: without your theme and language preferences the site still works, but it will not remember you and you would have to choose again on every page. Since no records are kept for tracking, there is no need for a consent box covering your screen either.",
+    "Üçüncü taraf":
+      "Third parties",
+    "Dışarıya giden tek iki istek":
+      "The only two outbound requests",
+    "Google Fonts — yazı tipleri":
+      "Google Fonts — typefaces",
+    "Sayfa açılırken yazı tipleri Google sunucularından yüklenir; bu sırada IP adresiniz Google'a iletilir. Çerez kurulmaz. Bu isteği tamamen ortadan kaldırmak için yazı tiplerini kendi sunucumuza taşıma çalışması sürüyor.":
+      "When the page loads, the typefaces are fetched from Google's servers, and your IP address is sent to Google in the process. No cookie is set. Work is under way to move the typefaces to our own server and remove this request entirely.",
+    "Google Maps — harita":
+      "Google Maps — map",
+    "İletişim sayfasındaki harita":
+      "The map on the contact page",
+    "siz \"Haritayı yükle\" düğmesine basmadan yüklenmez":
+      "is not loaded until you press the \"Load the map\" button",
+    ". Basmadığınız sürece Google'a hiçbir istek gitmez, hiçbir çerez kurulmaz. Onayınız yalnızca o sekme açık kaldığı sürece hatırlanır.":
+      ". Until you do, no request reaches Google and no cookie is set. Your consent is remembered only while that tab stays open.",
+    "Kontrol sizde":
+      "You are in control",
+    "Temizleme":
+      "Clearing",
+    "Kayıtları nasıl silersiniz?":
+      "How to delete the records",
+    "Tarayıcı ayarından":
+      "From browser settings",
+    "Tarayıcınızın gizlilik ayarlarında \"site verilerini temizle\" seçeneğiyle hepsi silinir. Chrome, Firefox, Safari ve Edge'de menü adları farklı olsa da hepsinde bulunur.":
+      "The \"clear site data\" option in your browser's privacy settings removes all of them. The menu names differ between Chrome, Firefox, Safari and Edge, but the option exists in all of them.",
+    "Gizli sekme":
+      "Private window",
+    "Gizli / özel sekmede gezerseniz sekmeyi kapattığınızda tüm kayıtlar kendiliğinden silinir.":
+      "If you browse in a private window, all records are removed automatically when you close it.",
+    "Hiç oluşmasın isterseniz":
+      "If you prefer none at all",
+    "Tema ve dil düğmelerine hiç dokunmazsanız, asistanı hiç açmazsanız ve haritayı yüklemezseniz tarayıcınıza hiçbir kayıt yazılmaz.":
+      "If you never touch the theme and language buttons, never open the assistant and never load the map, nothing is written to your browser.",
+    "Aklınıza takılan bir şey mi var?":
+      "Anything you are wondering about?",
+    "Sitede ne saklandığıyla ilgili her soruyu doğrudan bize sorabilirsiniz.":
+      "You can ask us directly about anything stored on this site.",
+    "Gizlilik metni":
+      "Privacy notice",
+    "Binbirdirek Mah. Dostluk Yurdu Sk. No:1/9":
+      "Binbirdirek Mah. Dostluk Yurdu Sk. No:1/9",
+
     /* ---------- çalışma anındaki metinler ---------- */
     "hakkında bilgi almak istiyorum.": "— I would like more information.",
     "Web sitesi talebi": "Website enquiry"
   }
-};// --- DİL DEĞİŞTİĞİNDE STATUS PANELİNİ YENİLEME KODU ---
-document.addEventListener('DOMContentLoaded', () => {
-  // Sitedeki dil butonlarını buluyoruz
-  const langButtons = document.querySelectorAll('[data-lang]'); 
-  
-  langButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Çeviri işleminin tamamlanması için çok kısa (50ms) bir süre bekleyip grafiği güncelliyoruz
-      setTimeout(() => {
-        if (window.DNY_STATUS && typeof window.DNY_STATUS.update === 'function') {
-          window.DNY_STATUS.update();
-        }
-      }, 50);
-    });
-  });
-});
+};
