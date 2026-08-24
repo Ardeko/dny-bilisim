@@ -1342,6 +1342,55 @@
     try { if (sessionStorage.getItem('dny-harita') === '1') btn.click(); } catch (e) {}
   });
 
+  /* ---------- 27. easter egg: 1996 arşiv sürümü ----------
+     İki tetikleyici var:
+       • klavyeden "1996" yazmak (masaüstü)
+       • altbilgideki telif yılına 5 kez dokunmak (mobil)
+     Her ikisi de nostaljik sunucu-odası tasarımına götürür. */
+  safe('nostalji-easter-egg', function () {
+    var HEDEF = 'dny-skeunostal.html';
+    var KOD = '1996';
+    var tampon = '';
+    var gidiyor = false;
+
+    function gecis() {
+      if (gidiyor) return;
+      gidiyor = true;
+      try { sessionStorage.setItem('dny-arsiv-gecis', '1'); } catch (e) {}
+      if (RM) { window.location.href = HEDEF; return; }
+      var perde = document.createElement('div');
+      perde.className = 'arsiv-gecis';
+      perde.setAttribute('aria-hidden', 'true');
+      perde.innerHTML = '<span>1996</span>';
+      document.body.appendChild(perde);
+      // perde tam kapandıktan sonra git; yarım kalırsa yine de gitsin
+      setTimeout(function () { window.location.href = HEDEF; }, 820);
+    }
+
+    // klavye: yazı alanına yazarken tetiklenmesin
+    document.addEventListener('keydown', function (e) {
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      var el = document.activeElement;
+      if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable)) return;
+      if (!/^[0-9]$/.test(e.key)) { tampon = ''; return; }
+      tampon = (tampon + e.key).slice(-KOD.length);
+      if (tampon === KOD) { tampon = ''; gecis(); }
+    });
+
+    // dokunmatik: telif yılına 5 kez
+    var yil = $('[data-year]');
+    if (yil) {
+      var sayac = 0, sonSaat = 0;
+      yil.setAttribute('title', '1996');
+      yil.addEventListener('click', function () {
+        var simdi = Date.now();
+        sayac = (simdi - sonSaat > 1200) ? 1 : sayac + 1;   // ara verilirse baştan
+        sonSaat = simdi;
+        if (sayac >= 5) { sayac = 0; gecis(); }
+      });
+    }
+  });
+
   /* ---------- 12. sayfa geçişi ---------- */
   if (!RM) {
     document.addEventListener('click', function (e) {

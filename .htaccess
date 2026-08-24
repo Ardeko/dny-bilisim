@@ -2,3 +2,6 @@ ErrorDocument 404 /404.html
 
 # eski adres yeni adrese kalıcı yönlendirilir
 Redirect 301 /uzak-destek.html /uzaktan-destek.html
+
+# easter egg: nostaljik arşiv sürümünün kısa adresi
+Redirect 302 /1996 /dny-skeunostal.html
