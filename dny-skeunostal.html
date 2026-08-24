@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="tr" data-room="off">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DNY Bilişim — Kurumsal bilişim, güvenlik ve destek çözümleri | İstanbul</title>
+<meta name="description" content="1996'dan beri kurumların donanım, ağ, güvenlik ve yazılım altyapısını kuran, yöneten ve kesintisiz tutan bilişim firması.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Lato:ital,wght@0,400;0,700;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   DNY Bilişim — SKEUOMORPHIC yeniden tasarım
+   Metafor: 19" sunucu kabini. Fırçalanmış alüminyum panel,
+   RJ45 patch paneli, LED göstergeler, pirinç kurucu plakası.
+   Tipografi: Saira Condensed (kazınmış panel yazısı)
+              Lato (gövde) + Share Tech Mono (gösterge)
+   ========================================================= */
+
+:root{
+  /* metal */
+  --alu-hi:#e7eaee; --alu-1:#cfd5dc; --alu-2:#b0b7c0; --alu-3:#8d949e; --alu-4:#666d77;
+  --steel-1:#4a5058; --steel-2:#343a41; --steel-3:#22262c; --steel-4:#15181c;
+  /* anot siyahı cam panel */
+  --glass-1:#1b1f25; --glass-2:#0d1014; --glass-3:#05070a;
+  /* pirinç */
+  --brass-1:#f2e0b2; --brass-2:#cda65b; --brass-3:#96742f; --brass-ink:#4d3a12;
+  /* ledler */
+  --led-g:#5cf07f; --led-a:#ffb020; --led-b:#54b6ff; --led-r:#ff4d3d;
+  /* marka (özgün logodan) */
+  --brand:#1a7fc1; --brand-2:#2e7cf6;
+  /* oda */
+  --room:#101216; --room-2:#191d22;
+  --ink:#1c2027; --ink-soft:#4b535e;
+
+  --disp:'Saira Condensed','Arial Narrow',sans-serif;
+  --body:'Lato','Segoe UI',system-ui,sans-serif;
+  --mono:'Share Tech Mono',ui-monospace,Menlo,monospace;
+
+  --gut:clamp(16px,3.5vw,40px);
+  --max:1180px;
+
+  --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E");
+}
+html[data-room="on"]{ --room:#8f9299; --room-2:#a9adb4; }
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0; font-family:var(--body); font-size:16px; line-height:1.62; color:#3d444e;
+  background:var(--room);
+  background-image:
+    radial-gradient(120% 70% at 50% -10%, rgba(255,255,255,.10), transparent 60%),
+    radial-gradient(90% 60% at 50% 110%, rgba(0,0,0,.55), transparent 60%);
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+body::before{ /* oda dokusu */
+  content:''; position:fixed; inset:0; background-image:var(--noise); opacity:.30;
+  pointer-events:none; z-index:0; mix-blend-mode:overlay;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+h1,h2,h3,h4{margin:0;font-family:var(--disp);font-weight:600;line-height:1.06;letter-spacing:.005em}
+p{margin:0}
+:focus-visible{outline:2px solid var(--led-b); outline-offset:3px; border-radius:2px}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- malzemeler ---------- */
+.mat-alu{
+  background-image:
+    var(--noise),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.13) 0 1px, rgba(0,0,0,.045) 1px 2px, transparent 2px 5px),
+    linear-gradient(178deg, var(--alu-hi) 0%, var(--alu-1) 16%, var(--alu-2) 54%, var(--alu-1) 82%, var(--alu-3) 100%);
+  background-blend-mode:overlay,normal,normal;
+  background-size:140px 140px,auto,auto;
+}
+.mat-glass{
+  background-image:
+    var(--noise),
+    linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,0) 32%),
+    linear-gradient(172deg, var(--glass-1), var(--glass-2) 55%, var(--glass-3));
+  background-blend-mode:overlay,normal,normal;
+  background-size:140px 140px,auto,auto;
+}
+.mat-brass{
+  background-image:
+    var(--noise),
+    repeating-linear-gradient(96deg, rgba(255,255,255,.16) 0 1px, rgba(0,0,0,.07) 1px 3px, transparent 3px 6px),
+    linear-gradient(162deg, var(--brass-1) 0%, var(--brass-2) 34%, var(--brass-3) 62%, var(--brass-1) 86%, var(--brass-3) 100%);
+  background-blend-mode:overlay,normal,normal;
+  background-size:140px 140px,auto,auto;
+}
+/* panel kabartma gölgeleri */
+.bevel{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.75),
+    inset 0 -2px 3px rgba(0,0,0,.34),
+    inset 2px 0 3px rgba(255,255,255,.22),
+    inset -2px 0 3px rgba(0,0,0,.22),
+    0 10px 22px -8px rgba(0,0,0,.75),
+    0 2px 0 rgba(0,0,0,.55);
+}
+.bevel-dark{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.14),
+    inset 0 -2px 4px rgba(0,0,0,.8),
+    0 12px 26px -10px rgba(0,0,0,.9),
+    0 2px 0 rgba(0,0,0,.6);
+}
+/* kazınmış yazı */
+.engrave{ color:#2a3038; text-shadow:0 -1px 0 rgba(0,0,0,.34), 0 1px 0 rgba(255,255,255,.85); }
+.engrave-soft{ color:#525a65; text-shadow:0 1px 0 rgba(255,255,255,.7); }
+.emboss-dark{ color:#e8edf3; text-shadow:0 1px 0 rgba(0,0,0,.9), 0 -1px 0 rgba(255,255,255,.18); }
+
+/* vida */
+.screw{
+  position:absolute; width:15px; height:15px; border-radius:50%;
+  background:radial-gradient(circle at 34% 28%, #f6f8fa, #c3c9d1 42%, #7f868f 72%, #454a51 100%);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.9), inset 0 -2px 3px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.6);
+  z-index:6;
+}
+.screw::after{
+  content:''; position:absolute; inset:3px; transform:rotate(24deg);
+  background:
+    linear-gradient(90deg,transparent 43%, rgba(0,0,0,.62) 43% 57%, transparent 57%),
+    linear-gradient(0deg,transparent 43%, rgba(0,0,0,.62) 43% 57%, transparent 57%);
+  filter:drop-shadow(0 1px 0 rgba(255,255,255,.55));
+}
+.screw--tl{top:9px;left:9px} .screw--tr{top:9px;right:9px}
+.screw--bl{bottom:9px;left:9px} .screw--br{bottom:9px;right:9px}
+
+/* havalandırma ızgarası */
+.vents{
+  height:14px; border-radius:3px;
+  background:repeating-linear-gradient(90deg, #0e1114 0 3px, rgba(255,255,255,.35) 3px 4px, transparent 4px 9px);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.9), 0 1px 0 rgba(255,255,255,.5);
+}
+
+/* LED */
+.led{
+  width:9px;height:9px;border-radius:50%;flex:none;
+  background:radial-gradient(circle at 35% 30%, #4a5058, #1a1e23 70%);
+  box-shadow: inset 0 0 3px rgba(0,0,0,.95), 0 1px 0 rgba(255,255,255,.35);
+}
+.led.on{ background:radial-gradient(circle at 34% 28%, #ecfff0, var(--led-g) 42%, #14933a 100%);
+  box-shadow: 0 0 7px rgba(92,240,127,.95), 0 0 17px rgba(92,240,127,.45), inset 0 0 2px rgba(255,255,255,.9); }
+.led.amber{ background:radial-gradient(circle at 34% 28%, #fff3d6, var(--led-a) 42%, #a25e00 100%);
+  box-shadow: 0 0 7px rgba(255,176,32,.9), 0 0 15px rgba(255,176,32,.4), inset 0 0 2px rgba(255,255,255,.9); }
+.led.blue{ background:radial-gradient(circle at 34% 28%, #ddf1ff, var(--led-b) 42%, #0d5e9e 100%);
+  box-shadow: 0 0 7px rgba(84,182,255,.9), 0 0 16px rgba(84,182,255,.4), inset 0 0 2px rgba(255,255,255,.9); }
+@keyframes blink{0%,72%{opacity:1}76%,86%{opacity:.18}90%,100%{opacity:1}}
+.led.act{animation:blink 2.6s infinite}
+.led.act:nth-of-type(2n){animation-duration:1.8s;animation-delay:.4s}
+.led.act:nth-of-type(3n){animation-duration:3.4s;animation-delay:.9s}
+
+/* dymo etiket */
+.dymo{
+  display:inline-block; font-family:var(--disp); font-weight:600; font-size:11px;
+  letter-spacing:.22em; text-transform:uppercase; padding:4px 10px 3px; border-radius:3px;
+  background:linear-gradient(180deg,#333c48,#1c222a); color:#f2f5f8;
+  text-shadow:0 1px 1px rgba(0,0,0,.9), 0 -1px 0 rgba(255,255,255,.28);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.2), inset 0 -1px 0 rgba(0,0,0,.7), 0 2px 4px rgba(0,0,0,.5);
+}
+
+/* parlak düğmeler */
+.btn{
+  position:relative; display:inline-flex; align-items:center; justify-content:center; gap:9px;
+  font-family:var(--disp); font-weight:600; font-size:15px; letter-spacing:.07em; text-transform:uppercase;
+  padding:13px 24px 12px; border-radius:8px; cursor:pointer; isolation:isolate;
+  transition:transform .08s ease, box-shadow .12s ease, filter .18s ease;
+}
+.btn::after{ /* cam parlaklığı */
+  content:''; position:absolute; inset:1px 1px 48% 1px; border-radius:7px 7px 12px 12px;
+  background:linear-gradient(180deg, rgba(255,255,255,.46), rgba(255,255,255,.06));
+  pointer-events:none;
+}
+.btn--blue{
+  color:#fff; text-shadow:0 -1px 0 rgba(0,0,0,.55);
+  background:linear-gradient(180deg,#59b2f0 0%, var(--brand) 48%, #0f5f95 52%, #0a4a78 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.65), inset 0 -2px 2px rgba(0,0,0,.4),
+              0 1px 0 #063857, 0 3px 0 #04263b, 0 8px 16px -4px rgba(0,0,0,.7), 0 0 22px -6px rgba(46,124,246,.7);
+}
+.btn--steel{
+  color:#252b33; text-shadow:0 1px 0 rgba(255,255,255,.7);
+  background:linear-gradient(180deg,#f0f3f6 0%, #cfd5dc 48%, #b2b9c2 52%, #99a1ab 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.95), inset 0 -2px 2px rgba(0,0,0,.22),
+              0 1px 0 #7c848e, 0 3px 0 #5c636c, 0 8px 16px -6px rgba(0,0,0,.65);
+}
+.btn--red{
+  color:#fff; text-shadow:0 -1px 0 rgba(0,0,0,.5);
+  background:linear-gradient(180deg,#ff8f7f 0%, #e8402c 48%, #b7220f 52%, #8c1808 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.55), inset 0 -2px 2px rgba(0,0,0,.4),
+              0 1px 0 #6e1305, 0 3px 0 #4c0d03, 0 8px 16px -4px rgba(0,0,0,.7), 0 0 22px -6px rgba(255,77,61,.6);
+}
+.btn:hover{filter:brightness(1.07)}
+.btn:active{ transform:translateY(3px);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,.5), 0 1px 0 rgba(0,0,0,.4); }
+.btn--sm{padding:9px 16px 8px;font-size:13px;border-radius:7px}
+
+/* ekran / LCD */
+.lcd{
+  font-family:var(--mono); color:#8dffbd; letter-spacing:.04em;
+  background:linear-gradient(180deg,#07231a,#04140e 60%,#020b07);
+  border-radius:5px; padding:8px 12px;
+  text-shadow:0 0 7px rgba(141,255,189,.75);
+  box-shadow: inset 0 2px 7px rgba(0,0,0,.95), inset 0 0 0 1px rgba(141,255,189,.14), 0 1px 0 rgba(255,255,255,.4);
+}
+.lcd::selection{background:#8dffbd;color:#04140e}
+
+/* ---------- kabin iskeleti ---------- */
+.rack{ position:relative; z-index:2; max-width:calc(var(--max) + 84px); margin:0 auto; padding:0 42px; }
+.rail{
+  position:absolute; top:0; bottom:0; width:34px;
+  background:linear-gradient(90deg,#20242a 0%, #545b64 24%, #3c424a 58%, #1c1f24 100%);
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.6), 0 0 24px rgba(0,0,0,.6);
+}
+.rail::before{
+  content:''; position:absolute; inset:0 10px; border-radius:2px;
+  background:repeating-linear-gradient(180deg,
+     #090b0e 0 9px, rgba(255,255,255,.28) 9px 10px, transparent 10px 30px);
+  box-shadow:inset 0 0 3px rgba(0,0,0,.9);
+}
+.rail--l{left:0} .rail--r{right:0}
+@media(max-width:860px){ .rack{padding:0 8px} .rail{display:none} }
+
+/* raf birimi = bölüm */
+.unit{
+  position:relative; margin:14px 0; border-radius:6px; padding:clamp(22px,3.6vw,44px) clamp(18px,3.4vw,44px);
+}
+.unit--flush{padding-left:0;padding-right:0}
+.inner{max-width:var(--max); margin:0 auto; padding:0 clamp(4px,1.6vw,14px)}
+
+/* bölüm başlığı */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px; font-family:var(--disp); font-weight:600;
+  font-size:12px; letter-spacing:.26em; text-transform:uppercase; margin-bottom:14px;
+}
+.head{max-width:46ch; margin-bottom:clamp(24px,3vw,40px)}
+.head h2{font-size:clamp(28px,4.2vw,46px); text-transform:uppercase; letter-spacing:.01em}
+.head p{margin-top:12px; font-size:16.5px}
+
+/* ---------- 1U: üst ray / başlık ---------- */
+.topbar{position:sticky;top:0;z-index:60}
+.header{
+  position:relative; display:flex; align-items:center; gap:14px;
+  padding:9px 22px; border-radius:5px 5px 3px 3px; min-height:62px;
+}
+.header::after{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;
+  background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.85));}
+.brandplate{
+  display:flex;align-items:center;gap:0; padding:6px 14px; border-radius:4px; margin-left:8px;
+  background:linear-gradient(180deg,#fbfcfd,#dfe4e9 55%,#c2c9d1);
+  box-shadow: inset 0 1px 0 #fff, inset 0 -1px 2px rgba(0,0,0,.28), 0 2px 4px rgba(0,0,0,.45);
+}
+.brandplate img{height:30px;width:auto;filter:drop-shadow(0 1px 0 rgba(255,255,255,.9))}
+.nav{display:flex;align-items:center;gap:2px;margin-left:auto}
+.nav a{
+  font-family:var(--disp); font-weight:600; font-size:13.5px; letter-spacing:.13em; text-transform:uppercase;
+  padding:8px 11px; border-radius:5px; display:flex; align-items:center; gap:7px;
+  color:#333a43; text-shadow:0 1px 0 rgba(255,255,255,.8); transition:box-shadow .15s, background .15s;
+}
+.nav a:hover{ background:rgba(255,255,255,.4); box-shadow:inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 2px rgba(0,0,0,.2), 0 1px 2px rgba(0,0,0,.2);}
+.nav a[aria-current]{ background:linear-gradient(180deg,rgba(0,0,0,.16),rgba(0,0,0,.06));
+  box-shadow:inset 0 2px 4px rgba(0,0,0,.4); text-shadow:0 1px 0 rgba(255,255,255,.5)}
+.hdr-tools{display:flex;align-items:center;gap:12px;margin-left:10px}
+
+/* fiziksel rocker anahtar */
+.rocker{
+  position:relative; width:62px; height:30px; border-radius:6px; padding:3px; flex:none;
+  background:linear-gradient(180deg,#5a616b,#2b3037);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.8), 0 1px 0 rgba(255,255,255,.55);
+}
+.rocker span{
+  position:absolute; top:3px; left:3px; width:28px; height:24px; border-radius:4px;
+  background:linear-gradient(180deg,#fbfcfd,#c9d0d8 55%,#9aa2ac);
+  box-shadow: inset 0 1px 0 #fff, inset 0 -2px 2px rgba(0,0,0,.3), 0 2px 4px rgba(0,0,0,.6);
+  transition:transform .16s cubic-bezier(.3,1.4,.5,1);
+}
+.rocker b{position:absolute;top:0;bottom:0;width:31px;display:grid;place-items:center;
+  font-family:var(--disp);font-size:10px;letter-spacing:.1em;color:#c6ccd4;text-shadow:0 -1px 0 rgba(0,0,0,.9)}
+.rocker b:first-of-type{left:0} .rocker b:last-of-type{right:0}
+html[data-room="on"] .rocker span{transform:translateX(28px)}
+.lang{display:flex;border-radius:6px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.6)}
+.lang button{font-family:var(--disp);font-size:12px;letter-spacing:.14em;padding:7px 11px;color:#cbd2da;
+  background:linear-gradient(180deg,#454c55,#272c33); text-shadow:0 -1px 0 rgba(0,0,0,.8)}
+.lang button[aria-pressed="true"]{background:linear-gradient(180deg,#59b2f0,#0f5f95);color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.5), 0 0 14px -3px rgba(46,124,246,.9)}
+.burger{display:none}
+.progress{position:absolute;left:0;bottom:0;height:3px;width:0;z-index:2;
+  background:linear-gradient(90deg,var(--led-b),var(--led-g)); box-shadow:0 0 8px rgba(92,240,127,.8)}
+
+/* ---------- HERO ---------- */
+.hero{padding:0;overflow:hidden}
+.hero-grid{display:grid; gap:0}
+@media(min-width:940px){.hero-grid{grid-template-columns:minmax(0,1.32fr) minmax(0,.9fr)}}
+.hero-main{padding:clamp(30px,4.6vw,58px) clamp(22px,4vw,52px)}
+.hero .eyebrow{color:#7fd0ff;text-shadow:0 0 10px rgba(84,182,255,.7);}
+.hero .eyebrow::before{content:'';width:26px;height:2px;background:linear-gradient(90deg,var(--led-b),transparent);box-shadow:0 0 6px rgba(84,182,255,.8)}
+.hero h1{
+  font-size:clamp(34px,6vw,66px); text-transform:uppercase; letter-spacing:.005em; color:#f0f4f8;
+  text-shadow:0 2px 0 rgba(0,0,0,.9), 0 -1px 0 rgba(255,255,255,.16), 0 0 40px rgba(84,182,255,.14);
+}
+.hero p.lead{margin-top:18px;max-width:52ch;color:#a9b3be;font-size:17px;text-shadow:0 1px 2px rgba(0,0,0,.8)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px}
+.hero-side{
+  padding:clamp(22px,3vw,30px); border-left:1px solid rgba(255,255,255,.07);
+  background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(0,0,0,.3));
+}
+@media(max-width:939px){.hero-side{border-left:0;border-top:1px solid rgba(255,255,255,.08)}}
+.mod-title{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.mod-title h3{font-size:14px;letter-spacing:.22em;text-transform:uppercase;color:#cdd5de;text-shadow:0 1px 0 rgba(0,0,0,.9)}
+.pill-live{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;
+  color:#8dffbd;padding:3px 9px;border-radius:20px;background:rgba(0,0,0,.5);
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.9), 0 0 0 1px rgba(141,255,189,.2)}
+.statlist{display:grid;gap:7px}
+.statrow{display:flex;align-items:center;gap:10px;padding:8px 11px;border-radius:5px;
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.35));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07), inset 0 -1px 2px rgba(0,0,0,.6)}
+.statrow .nm{font-family:var(--disp);font-size:13.5px;letter-spacing:.09em;text-transform:uppercase;color:#c3cbd4}
+.statrow .ms{margin-left:auto;font-family:var(--mono);font-size:12px;color:#8dffbd;text-shadow:0 0 6px rgba(141,255,189,.6)}
+.hero-side .lcd{margin-top:12px;font-size:12.5px;text-align:center}
+.hero-note{margin-top:9px;font-family:var(--mono);font-size:11px;color:#6f7a86;text-align:center}
+
+/* destek şeridi */
+.support{display:flex;flex-wrap:wrap;align-items:center;gap:18px;padding:16px clamp(22px,4vw,52px);
+  border-top:1px solid rgba(255,255,255,.07);
+  background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.7))}
+.support .big{font-family:var(--disp);font-size:30px;color:#fff;letter-spacing:.04em;
+  text-shadow:0 0 16px rgba(255,176,32,.55), 0 2px 0 rgba(0,0,0,.9)}
+.support p{color:#98a2ad;font-size:14.5px;max-width:52ch}
+.support a.mail{margin-left:auto;font-family:var(--mono);font-size:14px;color:#8dffbd}
+
+/* ---------- LED matris kayan şerit ---------- */
+.ticker{
+  position:relative; overflow:hidden; padding:0; border-radius:5px;
+  background:linear-gradient(180deg,#0a0c0f,#05070a);
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.95), inset 0 0 0 1px rgba(255,255,255,.06), 0 4px 12px -6px #000;
+}
+.ticker::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle, rgba(0,0,0,0) 1px, rgba(0,0,0,.55) 1.4px);
+  background-size:4px 4px}
+.ticker-track{display:flex;gap:0;width:max-content;animation:slide 46s linear infinite}
+@keyframes slide{to{transform:translateX(-50%)}}
+.ticker-track span{
+  font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.2em;text-transform:uppercase;
+  color:#ffb020; text-shadow:0 0 9px rgba(255,176,32,.75); padding:13px 0; white-space:nowrap;
+}
+.ticker-track span::after{content:'◆';margin:0 22px;color:#54b6ff;text-shadow:0 0 8px rgba(84,182,255,.7);font-size:10px;vertical-align:middle}
+
+/* ---------- PATCH PANEL (hizmet katmanları) ---------- */
+.panel-head{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:26px}
+.panel-head .head{margin-bottom:0}
+.bays{display:grid;gap:12px}
+@media(min-width:700px){.bays{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1020px){.bays{grid-template-columns:repeat(3,1fr)}}
+.bay{
+  position:relative; border-radius:6px; padding:16px 16px 18px; text-align:left; width:100%;
+  background-image:
+    linear-gradient(180deg,rgba(255,255,255,.06),rgba(0,0,0,.3)),
+    linear-gradient(174deg,#2b3138,#171b20 60%,#0e1115);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.14), inset 0 -2px 4px rgba(0,0,0,.85),
+              0 6px 14px -8px rgba(0,0,0,.9);
+  transition:box-shadow .2s, transform .12s;
+}
+.bay:hover{box-shadow: inset 0 1px 0 rgba(255,255,255,.2), inset 0 -2px 4px rgba(0,0,0,.85),
+              0 8px 20px -8px rgba(0,0,0,.95), 0 0 0 1px rgba(84,182,255,.35);}
+.bay:active{transform:translateY(2px)}
+.bay-top{display:flex;align-items:center;gap:12px;margin-bottom:13px}
+.rj45{width:40px;height:34px;flex:none;filter:drop-shadow(0 1px 0 rgba(255,255,255,.14))}
+.rj45 .shell{fill:#0a0c0f;stroke:#565e68;stroke-width:1.2}
+.rj45 .pin{stroke:#e0b355;stroke-width:1.6;opacity:.9}
+.bay .leds{display:flex;gap:6px;margin-left:auto}
+.bay h3{font-size:20px;text-transform:uppercase;color:#e9eef4;letter-spacing:.02em;
+  text-shadow:0 1px 0 rgba(0,0,0,.9),0 -1px 0 rgba(255,255,255,.13)}
+.bay p{margin-top:9px;font-size:14.5px;color:#98a3ae;line-height:1.6}
+.bay .more{display:inline-flex;align-items:center;gap:7px;margin-top:13px;font-family:var(--disp);
+  font-size:12.5px;letter-spacing:.17em;text-transform:uppercase;color:#7fd0ff}
+.bay .more::after{content:'▸'}
+.panel-foot{margin-top:22px;display:flex;justify-content:center}
+
+/* ---------- 7 SEGMENT sayaç paneli ---------- */
+.meters{display:grid;gap:12px}
+@media(min-width:640px){.meters{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.meters{grid-template-columns:repeat(4,1fr)}}
+.meter{
+  position:relative; border-radius:6px; padding:20px 16px 16px; text-align:center;
+  background:linear-gradient(180deg,#0a1512,#040b08);
+  box-shadow:inset 0 2px 10px rgba(0,0,0,.95), inset 0 0 0 1px rgba(255,176,32,.13), 0 1px 0 rgba(255,255,255,.35);
+}
+.meter .digits{position:relative;font-family:var(--mono);font-size:clamp(34px,4.6vw,48px);line-height:1;
+  color:var(--led-a); text-shadow:0 0 10px rgba(255,176,32,.85), 0 0 26px rgba(255,176,32,.35)}
+.meter .ghost{position:absolute;inset:0;color:rgba(255,176,32,.09);text-shadow:none;pointer-events:none}
+.meter .lbl{margin-top:12px;font-family:var(--disp);font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+  color:#6f8079;text-shadow:0 1px 0 rgba(0,0,0,.9)}
+.meter::after{content:'';position:absolute;inset:0;border-radius:6px;pointer-events:none;
+  background:linear-gradient(112deg,rgba(255,255,255,.10) 0 22%,transparent 42%)}
+
+/* ---------- PİRİNÇ KURUCU PLAKASI ---------- */
+.plaque-wrap{display:grid;gap:22px;align-items:start}
+@media(min-width:940px){.plaque-wrap{grid-template-columns:minmax(0,.92fr) minmax(0,1fr);gap:38px}}
+.plaque{
+  position:relative;border-radius:5px;padding:34px 30px 30px;
+  box-shadow: inset 0 1px 0 rgba(255,252,235,.85), inset 0 -2px 5px rgba(0,0,0,.45),
+              0 14px 30px -12px rgba(0,0,0,.9), 0 2px 0 rgba(0,0,0,.5);
+}
+.plaque .rule{height:2px;margin:14px 0 16px;background:linear-gradient(90deg,rgba(77,58,18,.5),rgba(77,58,18,.05));
+  box-shadow:0 1px 0 rgba(255,246,214,.55)}
+.plaque q{display:block;font-family:var(--disp);font-weight:600;font-size:clamp(21px,2.6vw,29px);line-height:1.22;
+  color:var(--brass-ink); text-shadow:0 1px 0 rgba(255,248,216,.7), 0 -1px 0 rgba(0,0,0,.25); quotes:'“' '”'}
+.plaque .who{margin-top:14px;font-family:var(--disp);font-size:13px;letter-spacing:.2em;text-transform:uppercase;
+  color:#5f4a1c;text-shadow:0 1px 0 rgba(255,248,216,.6)}
+.plaque .est{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;color:#6b5423;margin-bottom:4px}
+.why p{color:#aeb7c1;font-size:16px;margin-top:14px;text-shadow:0 1px 2px rgba(0,0,0,.7)}
+.why p:first-of-type{margin-top:0}
+.why .eyebrow{color:#ffc457;text-shadow:0 0 10px rgba(255,176,32,.5)}
+.why h2{color:#eef2f7;font-size:clamp(26px,3.4vw,38px);text-transform:uppercase;text-shadow:0 2px 0 rgba(0,0,0,.85)}
+.why .btn{margin-top:22px}
+
+/* ---------- 4 ADIM: anahtar blokları ---------- */
+.steps{display:grid;gap:12px}
+@media(min-width:660px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1040px){.steps{grid-template-columns:repeat(4,1fr)}}
+.step{position:relative;border-radius:6px;padding:18px 16px 20px;
+  background-image:
+    var(--noise),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.10) 0 1px, rgba(0,0,0,.04) 1px 2px, transparent 2px 5px),
+    linear-gradient(178deg,#e2e6ea,#c1c8d0 52%,#a5adb6);
+  background-blend-mode:overlay,normal,normal; background-size:140px 140px,auto,auto;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 -2px 3px rgba(0,0,0,.3), 0 8px 18px -10px rgba(0,0,0,.8);
+}
+.toggle{position:relative;width:40px;height:62px;border-radius:6px;margin-bottom:14px;
+  background:linear-gradient(180deg,#3a4048,#1d2126);
+  box-shadow:inset 0 2px 5px rgba(0,0,0,.85), 0 1px 0 rgba(255,255,255,.75)}
+.toggle::before{content:'';position:absolute;left:9px;right:9px;top:6px;height:26px;border-radius:11px 11px 5px 5px;
+  background:linear-gradient(180deg,#fdfefe,#c7ced6 60%,#98a0aa);
+  box-shadow:inset 0 1px 0 #fff, 0 3px 5px rgba(0,0,0,.6)}
+.toggle::after{content:'ON';position:absolute;left:0;right:0;bottom:7px;text-align:center;
+  font-family:var(--disp);font-size:10px;letter-spacing:.16em;color:#7fe79a;text-shadow:0 0 7px rgba(92,240,127,.8)}
+.step .no{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:#5b636d}
+.step h3{margin-top:4px;font-size:21px;text-transform:uppercase;color:#242a31;
+  text-shadow:0 -1px 0 rgba(0,0,0,.25),0 1px 0 rgba(255,255,255,.9)}
+.step p{margin-top:9px;font-size:14.5px;color:#4e5661}
+
+/* ---------- REFERANS PLAKALARI ---------- */
+.tags{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:11px}
+.tag{position:relative;border-radius:4px;padding:15px 14px 14px;text-align:center;
+  box-shadow: inset 0 1px 0 rgba(255,252,235,.8), inset 0 -2px 4px rgba(0,0,0,.4), 0 6px 14px -8px rgba(0,0,0,.85);}
+.tag span{font-family:var(--disp);font-weight:600;font-size:16px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--brass-ink);text-shadow:0 1px 0 rgba(255,248,216,.65), 0 -1px 0 rgba(0,0,0,.28)}
+.tag i{position:absolute;width:6px;height:6px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#fff7dd,#b08d3e 60%,#6a5119);
+  box-shadow:inset 0 -1px 1px rgba(0,0,0,.5),0 1px 1px rgba(0,0,0,.4)}
+.tag i:nth-child(1){top:6px;left:6px} .tag i:nth-child(2){top:6px;right:6px}
+.tag i:nth-child(3){bottom:6px;left:6px} .tag i:nth-child(4){bottom:6px;right:6px}
+
+/* ---------- CTA ---------- */
+.cta{text-align:center}
+.cta h2{font-size:clamp(28px,4.4vw,48px);text-transform:uppercase;color:#f2f6fa;
+  text-shadow:0 2px 0 rgba(0,0,0,.9),0 0 40px rgba(84,182,255,.16)}
+.cta p{margin:14px auto 0;max-width:58ch;color:#a3adb8;font-size:16.5px}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:26px}
+
+/* ---------- FOOTER (kablo kanalı) ---------- */
+.foot{
+  border-radius:4px 4px 8px 8px; padding:34px clamp(20px,3.6vw,44px) 22px; margin-bottom:26px;
+  background-image:linear-gradient(180deg,#22262c,#131619 60%,#0b0d10);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.1), 0 -2px 0 rgba(0,0,0,.6), 0 16px 40px -18px #000;
+}
+.foot-grid{display:grid;gap:26px}
+@media(min-width:820px){.foot-grid{grid-template-columns:1.5fr 1fr 1fr 1.2fr}}
+.foot h4{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:#8f99a4;margin-bottom:12px;
+  text-shadow:0 1px 0 rgba(0,0,0,.9)}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.foot a,.foot li{font-size:14.5px;color:#9aa4af}
+.foot a:hover{color:#7fd0ff}
+.foot .about{font-size:14.5px;color:#8d97a2;margin-top:12px;max-width:42ch}
+.foot .brandplate{margin-left:0;display:inline-flex}
+.foot-bar{margin-top:26px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08);
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+  font-family:var(--mono);font-size:12px;color:#69737e}
+.foot-bar a{color:#7f8b96}
+
+/* mobil menü */
+@media(max-width:1040px){
+  .nav{position:absolute;top:100%;left:0;right:0;display:none;flex-direction:column;align-items:stretch;gap:0;
+    padding:8px;border-radius:0 0 6px 6px;
+    background:linear-gradient(180deg,#cfd5dc,#aab1ba);
+    box-shadow:0 18px 30px -12px rgba(0,0,0,.85), inset 0 1px 0 rgba(255,255,255,.8)}
+  .nav.open{display:flex}
+  .burger{display:inline-flex;margin-left:auto}
+}
+@media(max-width:520px){
+  .hdr-tools .lang{display:none}
+  .support a.mail{margin-left:0}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="rack">
+  <div class="rail rail--l" aria-hidden="true"></div>
+  <div class="rail rail--r" aria-hidden="true"></div>
+
+  <!-- ============ 1U · ÜST RAY ============ -->
+  <div class="topbar">
+    <header class="header mat-alu bevel">
+      <span class="screw screw--tl" aria-hidden="true"></span>
+      <span class="screw screw--bl" aria-hidden="true"></span>
+      <span class="screw screw--tr" aria-hidden="true"></span>
+      <span class="screw screw--br" aria-hidden="true"></span>
+
+      <a class="brandplate" href="#" aria-label="DNY Bilişim ana sayfa">
+        <img src="assets/dny.png" alt="DNY Bilişim">
+      </a>
+
+      <button class="btn btn--steel btn--sm burger" id="burger" aria-expanded="false" aria-controls="nav">Menü</button>
+
+      <nav class="nav" id="nav" aria-label="Ana menü">
+        <a href="#" aria-current="page"><span class="led on" aria-hidden="true"></span>Ana sayfa</a>
+        <a href="#neden">Hakkımızda</a>
+        <a href="#hizmetler">Hizmetler</a>
+        <a href="#referanslar">Referanslar</a>
+        <a href="#destek">Uzaktan destek</a>
+        <a href="#sss">SSS</a>
+        <a href="#iletisim">İletişim</a>
+      </nav>
+
+      <div class="hdr-tools">
+        <div class="lang" role="group" aria-label="Dil">
+          <button aria-pressed="true">TR</button>
+          <button aria-pressed="false">EN</button>
+        </div>
+        <button class="rocker" id="lights" aria-pressed="false" aria-label="Oda ışığı">
+          <b>OFF</b><b>ON</b><span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="progress" id="progress" aria-hidden="true"></div>
+    </header>
+  </div>
+
+  <!-- ============ 6U · HERO ============ -->
+  <section class="unit hero mat-glass bevel-dark">
+    <span class="screw screw--tl" aria-hidden="true"></span>
+    <span class="screw screw--bl" aria-hidden="true"></span>
+    <span class="screw screw--tr" aria-hidden="true"></span>
+    <span class="screw screw--br" aria-hidden="true"></span>
+
+    <div class="hero-grid">
+      <div class="hero-main">
+        <span class="eyebrow">1996'dan beri · İstanbul</span>
+        <h1>Başarılı işler,<br>güvenle başlar.</h1>
+        <p class="lead">Kurumların donanım, ağ, güvenlik ve yazılım altyapısını kuruyor, yönetiyor ve kesintisiz tutuyoruz. Tek muhatap, aralıksız destek.</p>
+        <div class="hero-cta">
+          <a class="btn btn--blue" href="#hizmetler">Hizmetlerimiz</a>
+          <a class="btn btn--steel" href="#iletisim">Teklif isteyin</a>
+        </div>
+      </div>
+
+      <aside class="hero-side">
+        <div class="mod-title">
+          <span class="led on act" aria-hidden="true"></span>
+          <h3>Sistem durumu</h3>
+          <span class="pill-live">● canlı</span>
+        </div>
+        <div class="statlist">
+          <div class="statrow"><span class="led on act"></span><span class="nm">Web</span><span class="ms">38 ms</span></div>
+          <div class="statrow"><span class="led on act"></span><span class="nm">E-posta</span><span class="ms">52 ms</span></div>
+          <div class="statrow"><span class="led on act"></span><span class="nm">Hosting</span><span class="ms">44 ms</span></div>
+          <div class="statrow"><span class="led on act"></span><span class="nm">Yedekleme</span><span class="ms">61 ms</span></div>
+          <div class="statrow"><span class="led on act"></span><span class="nm">Uzak destek</span><span class="ms">29 ms</span></div>
+          <div class="statrow"><span class="led on act"></span><span class="nm">İzleme</span><span class="ms">33 ms</span></div>
+        </div>
+        <div class="lcd">TÜM SİSTEMLER ÇALIŞIYOR · 6/6 AKTİF</div>
+        <p class="hero-note">Yanıt süreleri her 25 saniyede yenilenir.</p>
+      </aside>
+    </div>
+
+    <div class="support">
+      <span class="big">7/24</span>
+      <p>Sisteminiz durursa her saat bize ulaşabilirsiniz. Uzaktan bağlantıyla anında müdahale, gerektiğinde aynı gün yerinde servis.</p>
+      <a class="mail" href="mailto:destek@dny.com.tr">destek@dny.com.tr</a>
+    </div>
+  </section>
+
+  <!-- ============ 1U · LED ŞERİT ============ -->
+  <div class="unit unit--flush ticker" aria-hidden="true">
+    <div class="ticker-track" id="tick"></div>
+  </div>
+
+  <!-- ============ 8U · PATCH PANEL ============ -->
+  <section class="unit mat-alu bevel" id="hizmetler">
+    <span class="screw screw--tl" aria-hidden="true"></span>
+    <span class="screw screw--bl" aria-hidden="true"></span>
+    <span class="screw screw--tr" aria-hidden="true"></span>
+    <span class="screw screw--br" aria-hidden="true"></span>
+    <div class="inner">
+      <div class="panel-head">
+        <div class="head">
+          <span class="eyebrow engrave-soft">Servis mimarisi</span>
+          <h2 class="engrave">Altyapının her<br>katmanı bizde</h2>
+          <p class="engrave-soft">Kutulara dokunun: her biri sorumluluk aldığımız bir katmanı anlatıyor.</p>
+        </div>
+        <div class="vents" style="flex:1;min-width:160px;margin-bottom:8px" aria-hidden="true"></div>
+      </div>
+
+      <div class="bays" id="bays"></div>
+
+      <div class="panel-foot">
+        <a class="btn btn--blue" href="#hizmetler">Sekiz hizmetin tamamını görün</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3U · SAYAÇLAR ============ -->
+  <section class="unit mat-glass bevel-dark">
+    <span class="screw screw--tl" aria-hidden="true"></span>
+    <span class="screw screw--bl" aria-hidden="true"></span>
+    <span class="screw screw--tr" aria-hidden="true"></span>
+    <span class="screw screw--br" aria-hidden="true"></span>
+    <div class="inner">
+      <div class="head" style="max-width:none">
+        <span class="eyebrow" style="color:#ffc457">1996'dan bugüne</span>
+        <h2 style="color:#eef2f7;text-shadow:0 2px 0 rgba(0,0,0,.85)">Rakamlarla DNY</h2>
+      </div>
+      <div class="meters">
+        <div class="meter"><div class="digits"><span class="ghost">8888</span><span data-count="1996">0000</span></div><div class="lbl">Kuruluş yılı</div></div>
+        <div class="meter"><div class="digits"><span class="ghost">88</span><span data-count="30" data-suffix="+">00</span></div><div class="lbl">Yıllık saha deneyimi</div></div>
+        <div class="meter"><div class="digits"><span class="ghost">8/88</span><span>7/24</span></div><div class="lbl">Açık destek</div></div>
+        <div class="meter"><div class="digits"><span class="ghost">88</span><span data-count="12" data-suffix="+">00</span></div><div class="lbl">Kurumsal referans</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6U · KURUCU PLAKASI ============ -->
+  <section class="unit mat-glass bevel-dark" id="neden">
+    <span class="screw screw--tl" aria-hidden="true"></span>
+    <span class="screw screw--bl" aria-hidden="true"></span>
+    <span class="screw screw--tr" aria-hidden="true"></span>
+    <span class="screw screw--br" aria-hidden="true"></span>
+    <div class="inner plaque-wrap">
+      <div class="plaque mat-brass">
+        <span class="screw screw--tl" aria-hidden="true"></span>
+        <span class="screw screw--bl" aria-hidden="true"></span>
+        <span class="screw screw--tr" aria-hidden="true"></span>
+        <span class="screw screw--br" aria-hidden="true"></span>
+        <div class="est">EST. 1996 — İSTANBUL</div>
+        <div class="rule" aria-hidden="true"></div>
+        <q>Otuz yıldır aynı işi yapıyoruz: kurumların durmamasını sağlamak.</q>
+        <div class="who">— Ekrem Şeneş, Kurucu</div>
+      </div>
+      <div class="why">
+        <span class="eyebrow">Neden DNY</span>
+        <h2>Kısa sürede kurulan,<br>uzun süre ayakta kalan</h2>
+        <p>1996 yılından beri destek, güvenlik ve danışmanlık hizmetlerimizi sektörün gelişimine göre güncelliyoruz. Kısa sürede kurulan, uzun süre ayakta kalan çözümler üretiyoruz.</p>
+        <p>Yamalı çözümlerle vakit kaybettirmeyiz. Önce mevcut altyapıyı dinler, sonra tek bir plan yazarız; kurulumdan sonra da sistemi biz izleriz. Arıza büyümeden fark edilir, çoğu zaman siz haberdar olmadan kapanır.</p>
+        <a class="btn btn--steel" href="#neden">Hikâyemizi okuyun</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8U · ÇALIŞMA BİÇİMİ ============ -->
+  <section class="unit mat-alu bevel" id="destek">
+    <span class="screw screw--tl" aria-hidden="true"></span>
+    <span class="screw screw--bl" aria-hidden="true"></span>
+    <span class="screw screw--tr" aria-hidden="true"></span>
+    <span class="screw screw--br" aria-hidden="true"></span>
+    <div class="inner">
+      <div class="head">
+        <span class="eyebrow engrave-soft">Çalışma biçimi</span>
+        <h2 class="engrave">Dört adım,<br>sonrası kesintisiz</h2>
+      </div>
+      <div class="steps">
+        <article class="step">
+          <div class="toggle" aria-hidden="true"></div>
+          <div class="no">ADIM 01</div><h3>Keşif</h3>
+          <p>Yerinde geliyoruz. Mevcut donanım, ağ ve yazılım envanteri çıkarılır; darboğazlar ve güvenlik açıkları raporlanır.</p>
+        </article>
+        <article class="step">
+          <div class="toggle" aria-hidden="true"></div>
+          <div class="no">ADIM 02</div><h3>Kurulum</h3>
+          <p>Onaylanan plan uygulanır: tedarik, kablolama, sunucu ve güvenlik yapılandırması, veri taşıma.</p>
+        </article>
+        <article class="step">
+          <div class="toggle" aria-hidden="true"></div>
+          <div class="no">ADIM 03</div><h3>İzleme</h3>
+          <p>Sistemler uzaktan izlenir. Yedekler kontrol edilir, güncellemeler planlanır; arıza büyümeden yakalanır.</p>
+        </article>
+        <article class="step">
+          <div class="toggle" aria-hidden="true"></div>
+          <div class="no">ADIM 04</div><h3>7/24 destek</h3>
+          <p>Tek muhatap. Gece ya da hafta sonu fark etmez; uzaktan bağlantıyla anında, gerektiğinde yerinde müdahale.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4U · REFERANSLAR ============ -->
+  <section class="unit mat-glass bevel-dark" id="referanslar">
+    <span class="screw screw--tl" aria-hidden="true"></span>
+    <span class="screw screw--bl" aria-hidden="true"></span>
+    <span class="screw screw--tr" aria-hidden="true"></span>
+    <span class="screw screw--br" aria-hidden="true"></span>
+    <div class="inner">
+      <div class="head" style="max-width:none">
+        <span class="eyebrow" style="color:#ffc457">Referanslar</span>
+        <h2 style="color:#eef2f7;text-shadow:0 2px 0 rgba(0,0,0,.85)">Yıllardır aynı ekiple çalışan kurumlar</h2>
+      </div>
+      <div class="tags" id="tags"></div>
+      <div class="panel-foot"><a class="btn btn--steel" href="#referanslar">Referans listesinin tamamı</a></div>
+    </div>
+  </section>
+
+  <!-- ============ 4U · CTA ============ -->
+  <section class="unit mat-glass bevel-dark cta" id="iletisim">
+    <span class="screw screw--tl" aria-hidden="true"></span>
+    <span class="screw screw--bl" aria-hidden="true"></span>
+    <span class="screw screw--tr" aria-hidden="true"></span>
+    <span class="screw screw--br" aria-hidden="true"></span>
+    <div class="inner">
+      <h2>Altyapınızı birlikte<br>gözden geçirelim</h2>
+      <p>Keşif ziyareti ve ilk değerlendirme için bize yazın ya da formu doldurun; aynı gün içinde dönüş yapıyoruz.</p>
+      <div class="cta-row">
+        <a class="btn btn--red" href="mailto:destek@dny.com.tr">destek@dny.com.tr</a>
+        <a class="btn btn--steel" href="#iletisim">Form doldurun</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER · KABLO KANALI ============ -->
+  <footer class="foot" id="sss">
+    <div class="vents" style="margin-bottom:26px" aria-hidden="true"></div>
+    <div class="foot-grid">
+      <div>
+        <span class="brandplate"><img src="assets/ardeko.png" alt="DNY Bilişim"></span>
+        <p class="about">DNY Bilişim Donanım ve Danışmanlık Hizmetleri. 1996 yılında Ekrem Şeneş tarafından kurulan firmamız, İstanbul'da kurumsal bilişim altyapısı, güvenlik ve destek çözümleri sunmaktadır.</p>
+        <p class="lcd" style="display:inline-block;margin-top:14px;font-size:12.5px">7/24 · destek@dny.com.tr</p>
+      </div>
+      <div>
+        <h4>Kurumsal</h4>
+        <ul>
+          <li><a href="#neden">Hakkımızda</a></li>
+          <li><a href="#referanslar">Referanslar</a></li>
+          <li><a href="#destek">Uzaktan destek</a></li>
+          <li><a href="#sss">Sıkça sorulan sorular</a></li>
+          <li><a href="#sss">Gerekli yazılımlar</a></li>
+          <li><a href="#iletisim">İletişim</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hizmetler</h4>
+        <ul>
+          <li><a href="#hizmetler">Bilişim danışmanlığı</a></li>
+          <li><a href="#hizmetler">Donanım ve sistem</a></li>
+          <li><a href="#hizmetler">Ağ ve kablolama</a></li>
+          <li><a href="#hizmetler">Güvenlik çözümleri</a></li>
+          <li><a href="#hizmetler">Web tasarım ve yazılım</a></li>
+          <li><a href="#hizmetler">Hosting ve alan adı</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>İletişim</h4>
+        <ul>
+          <li><a href="mailto:destek@dny.com.tr">destek@dny.com.tr</a></li>
+          <li>Binbirdirek Mah. Dostluk Yurdu Sk. No:1/9 Yeşil Apt.</li>
+          <li>34122 Sultanahmet / Fatih — İstanbul</li>
+          <li>Ofis: Hafta içi 09:00–18:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bar">
+      <span>© 2026 DNY Bilişim — Tüm hakları saklıdır.</span>
+      <span><a href="#">Gizlilik ve KVKK</a> · <a href="#">Çerezler</a> · <a href="#sss">SSS</a></span>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- RJ45 jak çizimi ---- */
+  function rj45(){
+    return '<svg class="rj45" viewBox="0 0 40 34" aria-hidden="true">'
+      + '<path class="shell" d="M1 9h13V1h12v8h13v24H1z"/>'
+      + '<g class="pin">'
+      + [0,1,2,3,4,5,6,7].map(function(i){
+          var x = 6 + i*4; return '<line x1="'+x+'" y1="13" x2="'+x+'" y2="24"/>';
+        }).join('')
+      + '</g></svg>';
+  }
+
+  /* ---- patch panel bölmeleri ---- */
+  var bays = [
+    ['Katman 01','Ağ ve altyapı','İnternet çıkışından son prize kadar tek plan. Yapılandırılmış kablolama, switch yerleşimi, kablosuz kapsama ve katlar arası omurga aynı şemada kurulur.'],
+    ['Katman 02','Güvenlik katmanı','Güvenlik duvarı kuralları, kullanıcı yetkileri, kamera ve geçiş kontrolü tek elden yönetilir.'],
+    ['Katman 03','7/24 izleme ve destek','Sistemler uzaktan izlenir; arıza büyümeden yakalanır. Gece ya da hafta sonu fark etmeksizin tek muhatap.'],
+    ['Katman 04','Danışmanlık','Yatırım kararından önce envanter, risk ve bütçe raporu. Ne alınacağına birlikte karar veriyoruz.'],
+    ['Katman 05','Yazılım ve web','Kurumsal site, e-ticaret ve iş süreçlerinize özel yazılım; tasarımdan yayına aynı ekipte.'],
+    ['Katman 06','Yedekleme ve süreklilik','Otomatik yedek, düzenli geri dönüş testi ve felaket kurtarma planı.']
+  ];
+  var bayHost = document.getElementById('bays');
+  bayHost.innerHTML = bays.map(function(b){
+    return '<button class="bay" type="button">'
+      + '<div class="bay-top">' + rj45()
+      + '<span class="dymo">' + b[0] + '</span>'
+      + '<span class="leds"><i class="led on act"></i><i class="led amber act"></i></span>'
+      + '</div>'
+      + '<h3>' + b[1] + '</h3><p>' + b[2] + '</p>'
+      + '<span class="more">İncele</span></button>';
+  }).join('');
+
+  /* ---- referans plakaları ---- */
+  var refs = ['Döler Sigorta','Five O\u2019Clock','Melis Ecza Deposu','Jingle House','Master Service',
+              'Sarteks Makina','Akdağ Müşavirlik','Süperkrom','AR-VA'];
+  document.getElementById('tags').innerHTML = refs.map(function(r){
+    return '<div class="tag mat-brass"><i></i><i></i><i></i><i></i><span>'+r+'</span></div>';
+  }).join('');
+
+  /* ---- LED şerit ---- */
+  var words = ['donanım tedariki','sunucu kurulumu','yapılandırılmış kablolama','switch ve router',
+    'kablosuz ağ','güvenlik duvarı','kamera sistemleri','geçiş kontrol','7/24 teknik destek',
+    'uzaktan bağlantı','yerinde servis','web tasarım','e-ticaret','kurumsal e-posta','hosting',
+    'alan adı','yedekleme','felaket kurtarma'];
+  var one = words.map(function(w){return '<span>'+w+'</span>';}).join('');
+  document.getElementById('tick').innerHTML = one + one;
+
+  /* ---- oda ışığı anahtarı ---- */
+  var lights = document.getElementById('lights');
+  lights.addEventListener('click', function(){
+    var on = document.documentElement.getAttribute('data-room') === 'on';
+    document.documentElement.setAttribute('data-room', on ? 'off' : 'on');
+    lights.setAttribute('aria-pressed', String(!on));
+  });
+
+  /* ---- mobil menü ---- */
+  var burger = document.getElementById('burger'), nav = document.getElementById('nav');
+  burger.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(open));
+  });
+  nav.addEventListener('click', function(e){
+    if(e.target.tagName === 'A'){ nav.classList.remove('open'); burger.setAttribute('aria-expanded','false'); }
+  });
+
+  /* ---- kaydırma göstergesi ---- */
+  var bar = document.getElementById('progress');
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* ---- 7 segment sayaç ---- */
+  var digits = [].slice.call(document.querySelectorAll('[data-count]'));
+  function pad(el, v){
+    var w = (el.getAttribute('data-count') || '').length;
+    return String(v).padStart(w, '0') + (el.getAttribute('data-suffix') || '');
+  }
+  function run(el){
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    if(reduce){ el.textContent = pad(el, target); return; }
+    var t0 = performance.now(), dur = 1400;
+    (function step(t){
+      var k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = pad(el, Math.round(target * e));
+      if(k < 1) requestAnimationFrame(step);
+    })(t0);
+  }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(en){ if(en.isIntersecting){ run(en.target); io.unobserve(en.target); } });
+    }, {threshold:.5});
+    digits.forEach(function(d){ io.observe(d); });
+  } else { digits.forEach(run); }
+
+  /* ---- yanıt sürelerini tazele ---- */
+  if(!reduce){
+    setInterval(function(){
+      document.querySelectorAll('.statrow .ms').forEach(function(el){
+        el.textContent = (24 + Math.floor(Math.random()*46)) + ' ms';
+      });
+    }, 25000);
+  }
+})();
+</script>
+</body>
+</html>
