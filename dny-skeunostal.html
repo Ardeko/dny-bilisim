@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DNY Bilişim — Kurumsal bilişim, güvenlik ve destek çözümleri | İstanbul</title>
+<title>DNY Bilişim — Kurumsal bilişim, güvenlik ve destek çözümleri</title>
 <meta name="description" content="1996'dan beri kurumların donanım, ağ, güvenlik ve yazılım altyapısını kuran, yöneten ve kesintisiz tutan bilişim firması.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Lato:ital,wght@0,400;0,700;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
-   DNY Bilişim — SKEUOMORPHIC yeniden tasarım
+   DNY Bilişim — NOSTALJİK SERVER / KURUMSAL HİBRİT TASARIM
    Metafor: 19" sunucu kabini. Fırçalanmış alüminyum panel,
    RJ45 patch paneli, LED göstergeler, pirinç kurucu plakası.
    Tipografi: Saira Condensed (kazınmış panel yazısı)
@@ -32,6 +32,9 @@
   /* oda */
   --room:#101216; --room-2:#191d22;
   --ink:#1c2027; --ink-soft:#4b535e;
+  /* deri servis defteri (morph'tan) */
+  --leather:#402e24; --leather-hi:#5a4234; --stitch:#c9ae86;
+  --serif:'Instrument Serif','Times New Roman',Georgia,serif;
 
   --disp:'Saira Condensed','Arial Narrow',sans-serif;
   --body:'Lato','Segoe UI',system-ui,sans-serif;
@@ -396,26 +399,35 @@ html[data-room="on"] .rocker span{transform:translateX(28px)}
 .meter::after{content:'';position:absolute;inset:0;border-radius:6px;pointer-events:none;
   background:linear-gradient(112deg,rgba(255,255,255,.10) 0 22%,transparent 42%)}
 
-/* ---------- PİRİNÇ KURUCU PLAKASI ---------- */
-.plaque-wrap{display:grid;gap:22px;align-items:start}
-@media(min-width:940px){.plaque-wrap{grid-template-columns:minmax(0,.92fr) minmax(0,1fr);gap:38px}}
-.plaque{
-  position:relative;border-radius:5px;padding:34px 30px 30px;
-  box-shadow: inset 0 1px 0 rgba(255,252,235,.85), inset 0 -2px 5px rgba(0,0,0,.45),
-              0 14px 30px -12px rgba(0,0,0,.9), 0 2px 0 rgba(0,0,0,.5);
+/* ---------- DERİ SERVİS DEFTERİ · MORPH'TAN ---------- */
+.leatherbook{
+  position:relative;margin:22px auto;max-width:calc(var(--max) + 96px);border-radius:8px;
+  padding:10px;
+  background:
+    var(--noise),
+    radial-gradient(120% 90% at 25% 15%,var(--leather-hi) 0%,var(--leather) 45%,#2A1D16 100%);
+  background-blend-mode:soft-light,normal;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 18px 36px -16px rgba(0,0,0,.95),0 2px 0 rgba(0,0,0,.6);
 }
-.plaque .rule{height:2px;margin:14px 0 16px;background:linear-gradient(90deg,rgba(77,58,18,.5),rgba(77,58,18,.05));
-  box-shadow:0 1px 0 rgba(255,246,214,.55)}
-.plaque q{display:block;font-family:var(--disp);font-weight:600;font-size:clamp(21px,2.6vw,29px);line-height:1.22;
-  color:var(--brass-ink); text-shadow:0 1px 0 rgba(255,248,216,.7), 0 -1px 0 rgba(0,0,0,.25); quotes:'“' '”'}
-.plaque .who{margin-top:14px;font-family:var(--disp);font-size:13px;letter-spacing:.2em;text-transform:uppercase;
-  color:#5f4a1c;text-shadow:0 1px 0 rgba(255,248,216,.6)}
-.plaque .est{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;color:#6b5423;margin-bottom:4px}
-.why p{color:#aeb7c1;font-size:16px;margin-top:14px;text-shadow:0 1px 2px rgba(0,0,0,.7)}
-.why p:first-of-type{margin-top:0}
-.why .eyebrow{color:#ffc457;text-shadow:0 0 10px rgba(255,176,32,.5)}
-.why h2{color:#eef2f7;font-size:clamp(26px,3.4vw,38px);text-transform:uppercase;text-shadow:0 2px 0 rgba(0,0,0,.85)}
-.why .btn{margin-top:22px}
+.leatherbook__in{
+  padding:clamp(28px,4.5vw,52px) clamp(28px,4vw,56px);border-radius:5px;
+  border:2px dashed rgba(201,174,134,.42);
+}
+.leatherbook blockquote{margin:18px 0 0;font-family:var(--serif);font-size:clamp(24px,3.4vw,38px);line-height:1.22;color:#F4E7D4;letter-spacing:-.01em}
+.leatherbook cite{display:block;margin-top:16px;font-family:var(--mono);font-style:normal;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--stitch)}
+.leatherbook__cols{display:grid;gap:22px;margin-top:32px;padding-top:26px;border-top:1px solid rgba(201,174,134,.25)}
+@media(min-width:860px){.leatherbook__cols{grid-template-columns:1fr 1fr;gap:38px}}
+.leatherbook__cols p{color:#D7C4AC;font-size:15px}
+.leatherbook .silk{color:var(--stitch);text-shadow:0 1px 0 rgba(0,0,0,.5)}
+.leatherbook .brasslink{
+  display:inline-flex;align-items:center;gap:9px;margin-top:24px;padding:11px 16px;border-radius:4px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:#4d3a12;
+  background:linear-gradient(180deg,#f2e0b2,#cda65b 52%,#96742f);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8),inset 0 -2px 2px rgba(0,0,0,.35),0 3px 0 #634b19,0 7px 14px -6px rgba(0,0,0,.75);
+  text-shadow:0 1px 0 rgba(255,248,216,.65);
+}
+.leatherbook .brasslink::after{content:'→';font-size:15px;line-height:1}
 
 /* ---------- 4 ADIM: anahtar blokları ---------- */
 .steps{display:grid;gap:12px}
@@ -499,8 +511,93 @@ html[data-room="on"] .rocker span{transform:translateX(28px)}
   *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
   html{scroll-behavior:auto}
 }
+
+/* =========================================================
+   DNY NOSTALJİK KURUMSAL — SERVER RACK + ESKİ TABELA ESTETİĞİ
+   Temel: skeunostal / yalnızca içerik akışı ve interaktif şema iyileştirmeleri
+   ========================================================= */
+:root{
+  --disp:'Archivo','Segoe UI',system-ui,sans-serif;
+  --body:'Archivo','Segoe UI',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --max:1180px;
+}
+body{line-height:1.58}
+h1,h2,h3,h4{letter-spacing:-.02em}
+.hero h1{font-family:var(--disp);font-weight:800;letter-spacing:-.035em}
+.eyebrow,.nav a,.btn,.dymo,.mod-title h3,.support .big{font-family:var(--disp)}
+.hero-main{padding:clamp(34px,5vw,62px) clamp(24px,4.5vw,56px)}
+.hero-grid{gap:0}
+.hero-side{padding:clamp(24px,3.2vw,34px)}
+.hero-side .lcd{padding:12px 14px;font-size:13px}
+.statlist{gap:8px}
+.statrow{padding:9px 12px}
+.statrow .nm{font-family:var(--mono);font-size:12px;letter-spacing:.04em}
+.hero-cta{margin-top:30px}
+.btn{font-weight:700}
+.head{max-width:50ch}
+.head h2{font-family:var(--disp);font-weight:800;letter-spacing:-.03em}
+.panel-head{align-items:center}
+.bays{gap:14px}
+.bay{transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+.bay:hover{transform:translateY(-2px);filter:brightness(1.035)}
+.meters{gap:14px}
+.meter{border-radius:5px}
+.steps{gap:14px}
+.step{transition:transform .18s ease,box-shadow .18s ease}
+.step:hover{transform:translateY(-2px)}
+.tags{gap:12px}
+.tag{transition:transform .15s ease,filter .15s ease}
+.tag:hover{transform:translateY(-2px);filter:brightness(1.04)}
+/* More natural scrolling affordance on first viewport */
+.scroll-hint{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;color:#7e8994;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.scroll-hint::after{content:'↓';display:inline-grid;place-items:center;width:22px;height:22px;border:1px solid rgba(255,255,255,.18);border-radius:50%;animation:hintBob 1.8s ease-in-out infinite}
+
+/* ---------- nostaljik DNY tabelası + interaktif altyapı şeması ---------- */
+.legacy-stats__head{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:22px}
+.legacy-title{font-family:var(--disp);font-size:clamp(30px,4.4vw,50px);font-weight:800;letter-spacing:.08em;color:#f2f5f8;text-shadow:0 2px 0 rgba(0,0,0,.95),0 0 18px rgba(255,176,32,.12)}
+.legacy-badge{min-width:155px;padding:10px 14px;border:1px solid rgba(255,176,32,.22);border-radius:4px;background:linear-gradient(180deg,#30363d,#191d22);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -2px 4px rgba(0,0,0,.7),0 3px 8px rgba(0,0,0,.55);text-align:center}
+.legacy-badge b{display:block;font-family:var(--disp);font-size:24px;letter-spacing:.14em;color:#dce2e8;text-shadow:0 2px 0 rgba(0,0,0,.85)}
+.legacy-badge span{display:block;margin-top:2px;font-family:var(--mono);font-size:8px;letter-spacing:.16em;color:#77818c}
+.schema-panel{padding:16px;border-radius:5px;background:linear-gradient(180deg,#171b20,#090b0e);box-shadow:inset 0 2px 8px rgba(0,0,0,.95),inset 0 0 0 1px rgba(255,255,255,.06),0 4px 12px -7px #000}
+.schema-ports{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:700px){.schema-ports{grid-template-columns:repeat(2,1fr)}}
+.schema-port{position:relative;padding:13px 8px 11px;border-radius:3px;text-align:center;border:0;color:inherit;background:linear-gradient(180deg,#2a2f35,#171a1e);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -2px 3px rgba(0,0,0,.7),0 2px 5px rgba(0,0,0,.5);transition:transform .12s,box-shadow .18s,filter .18s}
+.schema-port:hover{transform:translateY(-2px);filter:brightness(1.04)}
+.schema-port.is-on{background:linear-gradient(180deg,#3a4650,#1d252d);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 0 1px rgba(84,182,255,.8),0 5px 14px rgba(0,0,0,.65)}
+.schema-port__jack{display:block;width:36px;height:27px;margin:0 auto 9px;border-radius:2px 2px 3px 3px;background:linear-gradient(180deg,#080a0d,#15181c 60%,#080a0d);box-shadow:inset 0 2px 5px rgba(0,0,0,.95),inset 0 -1px 0 rgba(255,255,255,.08);position:relative}
+.schema-port__jack::after{content:'';position:absolute;left:50%;top:-3px;transform:translateX(-50%);width:12px;height:8px;border-radius:0 0 2px 2px;background:#090b0e}
+.schema-port__jack::before{content:'';position:absolute;inset:6px 5px auto;height:1px;background:repeating-linear-gradient(90deg,#d9b15e 0 1.5px,transparent 1.5px 4px);opacity:.6}
+.schema-port .port-led{position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:50%;background:#20252b;box-shadow:inset 0 1px 2px rgba(0,0,0,.9)}
+.schema-port.is-on .port-led{background:#54b6ff;box-shadow:0 0 7px rgba(84,182,255,.9),0 0 14px rgba(84,182,255,.35)}
+.schema-port span:last-child{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;color:#7f8993;line-height:1.35}
+.schema-port.is-on span:last-child{color:#c5d8ec}
+.schema-readout{margin-top:12px;padding:21px;border-radius:4px;min-height:195px;font-family:var(--mono);color:#9fe8b4;background:repeating-linear-gradient(0deg,rgba(0,0,0,.24) 0 1px,transparent 1px 3px),linear-gradient(180deg,#102016,#07100b);box-shadow:inset 0 2px 10px rgba(0,0,0,.95),inset 0 0 35px rgba(63,221,120,.04);text-shadow:0 0 6px rgba(63,221,120,.5)}
+.schema-readout__hd{display:flex;justify-content:space-between;gap:14px;padding-bottom:10px;border-bottom:1px dashed rgba(159,232,180,.22);font-size:10px;letter-spacing:.15em;color:rgba(159,232,180,.58);text-transform:uppercase}
+.schema-readout h3{margin-top:14px;color:#dff5e5;font-size:22px;letter-spacing:.03em}
+.schema-readout p{margin-top:8px;color:rgba(159,232,180,.78);font-size:13px;line-height:1.65}
+.schema-readout ul{margin:12px 0 0;padding:0 0 0 18px;color:rgba(159,232,180,.64);font-size:11px;line-height:1.7}
+@keyframes schemaSwap{from{opacity:.45;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.schema-readout.is-swap{animation:schemaSwap .22s ease}
+@media(max-width:720px){.legacy-stats__head{align-items:flex-start}.legacy-badge{min-width:120px}.legacy-title{font-size:28px}}
+@keyframes hintBob{0%,100%{transform:translateY(0);opacity:.65}50%{transform:translateY(4px);opacity:1}}
+/* Hybrid brand plate: actual nostalgic logo + small equipment-style label */
+.brandplate img{max-width:148px;object-fit:contain}
+.brandplate{position:relative;overflow:hidden}
+.brandplate::before{content:'1996';position:absolute;right:7px;top:4px;font-family:var(--mono);font-size:7px;letter-spacing:.12em;color:#59616a;opacity:.7}
+
+@media(max-width:720px){
+  .brandplate::after{display:none}
+  .hero-main{padding-bottom:28px}
+  .support{align-items:flex-start}
+  .support .big{width:100%}
+  .support a.mail{margin-left:0}
+  .scroll-hint{margin-top:12px}
+}
+
 </style>
 </head>
+<!-- DNY: nostaljik rack donanım dili + eski tabela estetiği + interaktif altyapı şeması -->
 <body>
 
 <div class="rack">
@@ -554,19 +651,20 @@ html[data-room="on"] .rocker span{transform:translateX(28px)}
     <div class="hero-grid">
       <div class="hero-main">
         <span class="eyebrow">1996'dan beri · İstanbul</span>
-        <h1>Başarılı işler,<br>güvenle başlar.</h1>
+        <h1>Başarılı işler,<br><span style="color:#9CC3FF">güvenle</span> başlar.</h1>
         <p class="lead">Kurumların donanım, ağ, güvenlik ve yazılım altyapısını kuruyor, yönetiyor ve kesintisiz tutuyoruz. Tek muhatap, aralıksız destek.</p>
         <div class="hero-cta">
           <a class="btn btn--blue" href="#hizmetler">Hizmetlerimiz</a>
           <a class="btn btn--steel" href="#iletisim">Teklif isteyin</a>
         </div>
+        <div class="scroll-hint" aria-hidden="true">Aşağı kaydırın</div>
       </div>
 
       <aside class="hero-side">
         <div class="mod-title">
           <span class="led on act" aria-hidden="true"></span>
           <h3>Sistem durumu</h3>
-          <span class="pill-live">● canlı</span>
+          <span class="pill-live">● NORMAL</span>
         </div>
         <div class="statlist">
           <div class="statrow"><span class="led on act"></span><span class="nm">Web</span><span class="ms">38 ms</span></div>
@@ -577,7 +675,7 @@ html[data-room="on"] .rocker span{transform:translateX(28px)}
           <div class="statrow"><span class="led on act"></span><span class="nm">İzleme</span><span class="ms">33 ms</span></div>
         </div>
         <div class="lcd">TÜM SİSTEMLER ÇALIŞIYOR · 6/6 AKTİF</div>
-        <p class="hero-note">Yanıt süreleri her 25 saniyede yenilenir.</p>
+        <p class="hero-note">DNY SERVİS PANELİ · 6 MODÜL AKTİF</p>
       </aside>
     </div>
 
@@ -617,49 +715,61 @@ html[data-room="on"] .rocker span{transform:translateX(28px)}
     </div>
   </section>
 
-  <!-- ============ 3U · SAYAÇLAR ============ -->
-  <section class="unit mat-glass bevel-dark">
+  <!-- ============ 3U · RAKAMLARLA DNY ============ -->
+  <section class="unit mat-glass bevel-dark legacy-stats">
     <span class="screw screw--tl" aria-hidden="true"></span>
     <span class="screw screw--bl" aria-hidden="true"></span>
     <span class="screw screw--tr" aria-hidden="true"></span>
     <span class="screw screw--br" aria-hidden="true"></span>
     <div class="inner">
-      <div class="head" style="max-width:none">
-        <span class="eyebrow" style="color:#ffc457">1996'dan bugüne</span>
-        <h2 style="color:#eef2f7;text-shadow:0 2px 0 rgba(0,0,0,.85)">Rakamlarla DNY</h2>
+      <div class="legacy-stats__head">
+        <div>
+          <span class="eyebrow" style="color:#ffc457">DNY SERVİS KAYDI · NO. 001</span>
+          <h2 class="legacy-title">RAKAMLARLA DNY</h2>
+        </div>
+        <div class="legacy-badge" aria-hidden="true"><b>DNY</b><span>BİLİŞİM · 1996</span></div>
       </div>
       <div class="meters">
         <div class="meter"><div class="digits"><span class="ghost">8888</span><span data-count="1996">0000</span></div><div class="lbl">Kuruluş yılı</div></div>
-        <div class="meter"><div class="digits"><span class="ghost">88</span><span data-count="30" data-suffix="+">00</span></div><div class="lbl">Yıllık saha deneyimi</div></div>
-        <div class="meter"><div class="digits"><span class="ghost">8/88</span><span>7/24</span></div><div class="lbl">Açık destek</div></div>
+        <div class="meter"><div class="digits"><span class="ghost">88</span><span data-count="30" data-suffix="+">00</span></div><div class="lbl">Yıllık deneyim</div></div>
+        <div class="meter"><div class="digits"><span class="ghost">8/88</span><span>7/24</span></div><div class="lbl">Destek</div></div>
         <div class="meter"><div class="digits"><span class="ghost">88</span><span data-count="12" data-suffix="+">00</span></div><div class="lbl">Kurumsal referans</div></div>
       </div>
     </div>
   </section>
 
-  <!-- ============ 6U · KURUCU PLAKASI ============ -->
-  <section class="unit mat-glass bevel-dark" id="neden">
+  <!-- ============ DERİ SERVİS DEFTERİ · NEDEN DNY ============ -->
+  <section class="leatherbook" id="neden">
+    <div class="leatherbook__in">
+      <span class="silk">Neden DNY</span>
+      <blockquote>"Otuz yıldır aynı işi yapıyoruz: kurumların durmamasını sağlamak."</blockquote>
+      <cite>— Ekrem Şeneş, Kurucu</cite>
+      <div class="leatherbook__cols">
+        <p>1996 yılından beri destek, güvenlik ve danışmanlık hizmetlerimizi sektörün gelişimine göre güncelliyoruz. Kısa sürede kurulan, uzun süre ayakta kalan çözümler üretiyoruz.</p>
+        <p>Yamalı çözümlerle vakit kaybettirmeyiz. Önce mevcut altyapıyı dinler, sonra tek bir plan yazarız; kurulumdan sonra da sistemi biz izleriz. Arıza büyümeden fark edilir, çoğu zaman siz haberdar olmadan kapanır.</p>
+      </div>
+      <a class="brasslink" href="#">Hikâyemizi okuyun</a>
+    </div>
+  </section>
+
+  <!-- ============ 8U · İNTERAKTİF ŞEMA ============ -->
+  <section class="unit mat-alu bevel interactive-schematic" id="altyapi-semasi">
     <span class="screw screw--tl" aria-hidden="true"></span>
     <span class="screw screw--bl" aria-hidden="true"></span>
     <span class="screw screw--tr" aria-hidden="true"></span>
     <span class="screw screw--br" aria-hidden="true"></span>
-    <div class="inner plaque-wrap">
-      <div class="plaque mat-brass">
-        <span class="screw screw--tl" aria-hidden="true"></span>
-        <span class="screw screw--bl" aria-hidden="true"></span>
-        <span class="screw screw--tr" aria-hidden="true"></span>
-        <span class="screw screw--br" aria-hidden="true"></span>
-        <div class="est">EST. 1996 — İSTANBUL</div>
-        <div class="rule" aria-hidden="true"></div>
-        <q>Otuz yıldır aynı işi yapıyoruz: kurumların durmamasını sağlamak.</q>
-        <div class="who">— Ekrem Şeneş, Kurucu</div>
+    <div class="inner">
+      <div class="panel-head">
+        <div class="head">
+          <span class="eyebrow engrave-soft">İnteraktif şema</span>
+          <h2 class="engrave">Bir ofisin bilişim altyapısı nasıl kurulur?</h2>
+          <p class="engrave-soft">Patch panel üzerindeki portlara dokunun. Her portun arkasındaki işi, kararı ve güvenlik katmanını görün.</p>
+        </div>
+        <div class="vents" style="flex:1;min-width:160px;margin-bottom:8px" aria-hidden="true"></div>
       </div>
-      <div class="why">
-        <span class="eyebrow">Neden DNY</span>
-        <h2>Kısa sürede kurulan,<br>uzun süre ayakta kalan</h2>
-        <p>1996 yılından beri destek, güvenlik ve danışmanlık hizmetlerimizi sektörün gelişimine göre güncelliyoruz. Kısa sürede kurulan, uzun süre ayakta kalan çözümler üretiyoruz.</p>
-        <p>Yamalı çözümlerle vakit kaybettirmeyiz. Önce mevcut altyapıyı dinler, sonra tek bir plan yazarız; kurulumdan sonra da sistemi biz izleriz. Arıza büyümeden fark edilir, çoğu zaman siz haberdar olmadan kapanır.</p>
-        <a class="btn btn--steel" href="#neden">Hikâyemizi okuyun</a>
+      <div class="schema-panel">
+        <div class="schema-ports" id="schemaPorts"></div>
+        <div class="schema-readout" id="schemaReadout" aria-live="polite"></div>
       </div>
     </div>
   </section>
@@ -838,6 +948,31 @@ html[data-room="on"] .rocker span{transform:translateX(28px)}
     document.documentElement.setAttribute('data-room', on ? 'off' : 'on');
     lights.setAttribute('aria-pressed', String(!on));
   });
+
+
+  /* ---- interaktif altyapı şeması ---- */
+  var SCHEMA = [
+    ['internet','İnternet','Dışarıdan gelen trafik ilk burada karşılanır. Hat kapasitesi, yedek hat ve sabit IP ihtiyacını birlikte belirleriz.', ['Hat kapasitesi ve yedek hat planı','Sabit IP ve alan adı yönlendirmesi','Kesinti anında ikinci hatta geçiş']],
+    ['firewall','Güvenlik duvarı','Kurumun dış dünyaya açılan kapısı. Kural tabanlı filtreleme, VPN ve saldırı engelleme burada çalışır.', ['Kural yazımı ve düzenli gözden geçirme','Uzaktan çalışma için güvenli VPN','Saldırı kayıtları ve raporlama']],
+    ['switch','Switch + kablolama','Ofisin omurgası. Kat panoları, etiketleme ve port planı düzgün kurulursa arızanın kaynağı saniyeler içinde bulunur.', ['Yapılandırılmış kablolama','Port planı ve etiketleme','Kat ve bina arası omurga']],
+    ['server','Sunucu','Dosyalar, muhasebe ve iş uygulamaları için kapasite, yetkilendirme ve bakım takvimi birlikte planlanır.', ['Sunucu kurulumu ve kapasite planı','Klasör yetkileri ve kullanıcı grupları','Bakım ve güncelleme yönetimi']],
+    ['backup','Yedekleme','Yedeğin alınması kadar geri dönebilmek de önemlidir. Düzenli test ve bina dışında ikinci kopya kurulur.', ['Otomatik günlük yedek','Düzenli geri dönüş testi','Bina dışında ikinci kopya']],
+    ['clients','İş istasyonları','Kullanıcı bilgisayarları standart kurulumla hazırlanır; uzaktan destek ve gerektiğinde aynı gün yerinde müdahale sağlanır.', ['Standart yazılım paketi','Uzaktan destek istemcisi','Arızada yerinde müdahale']],
+    ['wifi','Kablosuz ağ','Kapsama ölçülerek planlanır. Misafir ağı kurum ağından ayrılır ve erişim yetkileri kontrol edilir.', ['Kapsama ölçümü','Misafir ağının ayrılması','Cihaz bazlı erişim yetkisi']],
+    ['camera','Kamera sistemi','Fiziksel güvenlik de altyapının parçasıdır. Kayıt, görüş açısı ve uzaktan izleme birlikte planlanır.', ['Kamera yerleşimi','Kayıt süresi ve depolama hesabı','Uzaktan izleme ve geçiş kontrolü']]
+  ];
+  var schemaPorts=document.getElementById('schemaPorts'), schemaReadout=document.getElementById('schemaReadout');
+  if(schemaPorts && schemaReadout){
+    schemaPorts.innerHTML=SCHEMA.map(function(n,i){return '<button class="schema-port" type="button" data-i="'+i+'"><i class="port-led"></i><span class="schema-port__jack"></span><span>'+n[1]+'</span></button>';}).join('');
+    function renderSchema(i){
+      var n=SCHEMA[i];
+      schemaReadout.innerHTML='<div class="schema-readout__hd"><span>MODÜL '+('0'+(i+1)).slice(-2)+' / 08</span><span>NORMAL</span></div><h3>'+n[1]+'</h3><p>'+n[2]+'</p><ul>'+n[3].map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';
+      schemaReadout.classList.remove('is-swap'); void schemaReadout.offsetWidth; schemaReadout.classList.add('is-swap');
+      Array.prototype.forEach.call(schemaPorts.children,function(b,j){b.classList.toggle('is-on',j===i);});
+    }
+    schemaPorts.addEventListener('click',function(e){var b=e.target.closest('.schema-port');if(!b)return;renderSchema(parseInt(b.getAttribute('data-i'),10));});
+    renderSchema(0);
+  }
 
   /* ---- mobil menü ---- */
   var burger = document.getElementById('burger'), nav = document.getElementById('nav');
